@@ -1,12 +1,27 @@
+<?php
+  require "Read.php";
+  $query = new Read();
+  $galery = $query->readGalery();
+?>
 <body>
+  <?php
+    if($galery){
+      foreach($galery as $data){
+        $imagen = $data['archivo'];
+        $descripción = $data['descripcion'];
+        ?>
         <div class="gallery">
-          <a target="_blank" href="img/1.jpg">
-            <img src="img/1.jpg" alt="Cinque Terre" width="600" height="400">
+          <a target="_blank" href="<?php echo $data['archivo']; ?>">
+            <img src="<?php echo $data['archivo']; ?>" alt="Cinque Terre" width="600" height="400">
           </a>
-          <div class="desc">Add a description of the image here</div>
+          <div class="desc"><?php echo $data['descripcion'] ?></div>
         </div>
+        <?php
+      }
+    }
+  ?>
         
-        <div class="gallery">
+        <!-- <div class="gallery">
           <a target="_blank" href="img/2.jpg">
             <img src="img/2.jpg" alt="Forest" width="600" height="400">
           </a>
@@ -81,5 +96,5 @@
             <img src="img/4.jpg" alt="Mountains" width="600" height="400">
           </a>
           <div class="desc">Add a description of the image here</div>
-        </div>
+        </div> -->
 </body>

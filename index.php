@@ -2,8 +2,11 @@
 <body>
     <?php include "header.php"; ?>
     <?php
-        $page = $_GET['p'];
-        // if(!$page) include "src/inicio.php";
+        if(isset($_GET['p'])) {
+            $page = $_GET['p'];
+        }else{
+            $page = "inicio";
+        }
         switch ($page) {
             case 'inicio':
                 include "src/inicio.php";

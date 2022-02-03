@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../config/Connection.php";
 include "../helper/Helper.php";
 class RegisterDB{
@@ -48,6 +49,14 @@ class RegisterDB{
                 }
             }
         }  
+    }
+
+    function getAdmin(){
+        $sql = "SELECT nombre FROM administrador";
+        $query = $this->cnx->prepare($sql);
+        if($query->execute()){
+            return $query;
+        } 
     }
 }
 ?>

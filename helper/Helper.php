@@ -8,7 +8,7 @@ class Helper{
             </script>';
         }else{
             echo '<script language="javascript">alert("'.$message.'");
-                    window.location.href="'.$redirectTo.'.php"
+                    window.location.href="'.$redirectTo.'"
                 </script>';
             // die();
         }
@@ -18,14 +18,16 @@ class Helper{
         if($file){
             $name_arch = basename($file['name']);
             $name_mod = date("m-d-y").$name_arch;
-            $route = "$route/" . $name_mod;
-            return $route;
+            $routeMove = "../../archivos/$route/" . $name_mod;
+            $routeInsert = "archivos/$route/" . $name_mod;
+            return [$routeMove,$routeInsert];
         }
     }
     function uploadFile($file,$route){
         $route = $this->generateRoute($file,$route);
-        if(isset($ubicacion) && !empty( $file['name'])){
-            $uploadFile = move_uploaded_file($file["tmp_name"],$route);
+        $routeMove = $route[0];
+        if(isset($file) && !empty( $file['name'])){
+            $uploadFile = move_uploaded_file($file["tmp_name"],$routeMove);
             return "true";
         }else{
             return "false";

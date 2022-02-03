@@ -1,6 +1,6 @@
 <?php
-include "../config/Connection.php";
-include "../helper/Helper.php";
+include "config/Connection.php";
+include "helper/Helper.php";
 class Read{
     public $cnx;
     public $helper;
