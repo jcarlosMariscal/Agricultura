@@ -1,3 +1,5 @@
+<!-- ARCHIVO QUE RECIBE TODOS LOS DATOS DE REGISTRO, HACE VALIDACIONES PARA EJECUTAR CIERTA FUNCIÓN -->
+
 <?php
 require "RegisterDB.php";
 $query = new RegisterDB();

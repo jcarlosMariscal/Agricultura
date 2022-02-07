@@ -1,6 +1,7 @@
-<?php include "head.php"; ?>
+<!-- Archivo de inicio, se incluyen el head, header, footer y scripts. Dependiendo de la sección se va llamando un archivo con su contenido -->
+<?php include "includes/head.php"; ?>
 <body>
-    <?php include "header.php"; ?>
+    <?php include "includes/header.php"; ?>
     <?php
         if(isset($_GET['p'])) {
             $page = $_GET['p'];
@@ -32,7 +33,10 @@
         }
     ?>
 
-    <?php include "footer.php"; ?>
+    <?php 
+        include "includes/footer.php"; 
+        include "includes/scripts.php";
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

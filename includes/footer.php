@@ -2,7 +2,7 @@
         <div class="footer-container">
             <div class="footer-main">
                 <div class="footer-columna1">
-                    <a href="index.php"><img src="img/comite_nacional_agro.png" class="img-fluid"
+                    <a href="index.php"><img src="img/comite.png" class="img-fluid"
                             alt="Responsive image"></a>
 
                 </div>

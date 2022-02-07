@@ -1,3 +1,4 @@
+<!-- CLASE CON MÉTODOS PARA CREAR REGISTROS -->
 <?php
 include "../../config/Connection.php";
 include "../../helper/Helper.php";

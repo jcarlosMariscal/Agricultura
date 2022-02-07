@@ -100,8 +100,6 @@
 
 
 /*navbar*/
-
-
 header {
   height: 90px;
   background: white;
@@ -124,7 +122,6 @@ header {
 }
 
 .enlaces a {
-  
   border: 2px solid transparent;
   padding: 4px 0;
   transition: 1s ease-out;
@@ -182,27 +179,6 @@ img{
   transform: scale(1.2);
 }
 
-.triangulo2{
-  clip-path: polygon(50% 100%, 0 0, 100% 0);
-}
-
-.triangulo3{
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-}
-
-.fondo{
-  background: url(../img/fondo.jpg);
-  background-size: 100%;
-  height: 60vh;
-  /*clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);*/
-}
-
-.fondo1{
-  background: url(../img/fondo.jpg);
-  background-size: cover;
-  height: 49vh;
-  clip-path: polygon(100% 0, 82% 100%, 18% 100%, 0 0);
-}
 /*documentos*/
 
 .bd{
@@ -320,8 +296,9 @@ border: 1px solid #777;
 }
 
 div.gallery img {
-width: 100%;
-height: auto;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
 div.desc {
@@ -345,14 +322,6 @@ text-align: center;
 .card-container.card {
   max-width: 600px;
 }
-.btn {
-  border-radius: 0;
-  height: 55px;
-  margin-bottom: 10px;
-  background-color: #47874a;
-  color: #f4f4f4;
-  font-size: 20px;
-}
 
 .card {
   background-color: #ffffff;
@@ -360,16 +329,125 @@ text-align: center;
   margin: 0 auto 25px;
   margin-top: 15px;
 }
-.form-signin #inputEmail,
-.form-signin #inputPassword {
-  height: 44px;
-  font-size: 16px;
+
+/*****estilo Peralta******/
+
+/*slider */
+
+.slider{
+	width: 100%;
+	margin: auto;
+	overflow: hidden;
+    height: 400px; /* originalmente 600px */
+    position: relative;
 }
-.form-signin input[type="email"],
-.form-signin input[type="password"],
-.form-signin input[type="text"],
-.form-signin button {
-  width: 100%;
-  display: block;
-  border-radius: 10px;
+
+.slider ul{
+	display: flex;
+	padding: 0;
+	width: 200%;
+
+	animation: cambio 20s infinite;
 }
+
+.slider li{
+	width: 100%;
+	list-style: none;
+}
+
+.slider img{
+	width: 100%;
+}
+
+@keyframes cambio{
+	0% {margin-left: 0;}
+	20% {margin-left: 0;}
+
+	25% {margin-left: -100%;}
+	40% {margin-left: -100%;}
+
+}
+
+/*slider*/
+
+/*card*/
+
+   
+   /* .card{
+		width: 20%;
+		display: inline-block;
+		box-shadow: 2px 2px 20px black;
+		border-radius: 5px; 
+		margin: 2%;
+	   } */
+
+
+	   .card1{
+		width: 20%;
+		display: inline-block;
+		box-shadow: 2px 2px 20px black;
+		border-radius: 5px; 
+		margin: 1%;
+	   }
+
+   .image img{
+	 width: 100%;
+	 border-top-right-radius: 5px;
+	 border-top-left-radius: 5px;
+	 
+   
+	
+	}
+   
+   .title{
+	
+	 text-align: center;
+	 padding: 10px;
+	 
+	}
+   
+   h1{
+	 font-size: 20px;
+	}
+   
+   .des{
+	 padding: 3px;
+	 text-align: center;
+	
+	 padding-top: 10px;
+		   border-bottom-right-radius: 5px;
+	 border-bottom-left-radius: 5px;
+   }
+   button{
+	 margin-top: 40px;
+	 margin-bottom: 10px;
+	 background-color: white;
+	 border: 1px solid white;
+	 border-radius: 5px;
+	 padding:10px;
+   }
+   button:hover{
+	 background-color: transparent;
+	 color: white;
+	 transition: .5s;
+	 cursor: pointer;
+   }
+
+/*gale*/
+
+/*documentos*/
+.sl-slider-wrapper {
+    width: 100%;
+    height: 500px; /* originalmente 600px */
+    overflow: hidden;
+    position: relative;
+}
+
+
+/************************/
+
+/*---------------------------------LOGIN-----------------------------------------------*/
+.err-admin{
+  color: red;
+}
+/*---------------------------------LOGIN-----------------------------------------------*/

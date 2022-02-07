@@ -1,6 +1,8 @@
+<!-- CLASE AUXILIAR, CONTIENE FUNCIONES QUE REALIZAN CIERTA FUNCIÓN, SI SE NECESITA EN ALGUNA SECCIÓN SOLO SE INVOCA -->
 <?php
 class Helper{
-    function validateInsert($insert,$message,$redirectTo){
+    // VALIDA SI SE INSERTO UN REGISTRO, MANDA UN MENSAJE EXITOSO O ERRÓNEO AL ADMINISTRADOR Y LO REDIRECCIONA A OTRA PÁGINA.
+    function validateInsert($insert,$message,$redirectTo){ 
 
         if(!$insert){
             echo '<script language="javascript">alert("Algo salió mal, no se pudo insertar en la base de datos");
@@ -14,6 +16,7 @@ class Helper{
         }
     }
 
+    // GENERA UNA RUTA PARA MOVER EL ARCHIVO Y OTRA PARA ALMACENAR EN LA BASE DE DATOS.
     function generateRoute($file,$route){
         if($file){
             $name_arch = basename($file['name']);
@@ -23,6 +26,8 @@ class Helper{
             return [$routeMove,$routeInsert];
         }
     }
+
+    // LLAMA A LA FUNCIÓN PARA GENERAR RUTAS, OBTIENE LA RUTA PARA MOVER UN ARCHIVO Y HACE UNAS VALIDACIONES.
     function uploadFile($file,$route){
         $route = $this->generateRoute($file,$route);
         $routeMove = $route[0];

@@ -1,0 +1,222 @@
+/* midificar botones de bienvedido */
+.usuario-modificar{
+   justify-content: center;
+}
+h5{
+  text-align: center;
+}
+/* diseño del navbar */
+.letra {
+    color: #47874a;
+    font-size: 15px;
+  }
+  .imagen {
+    padding: 2px 5px 20px 0;
+  }
+  @media screen and (max-width: 640px) {
+    .imagen {
+      width: 100%;
+      padding: 20px;
+    }
+    .letra {
+      width: 100%;
+      text-align: center;
+      margin: 10px 0;
+      display: block;
+    }
+  }
+  /* ------------------------------ */
+
+
+  /* botes de inicio */
+.btn-inicio{
+    width: 150px;
+    display: block;
+    border-radius: 10px;
+    background-color: #47874a;
+    color: #f4f4f4;
+    margin: 5px 2px;
+  }
+  i{
+    padding: 0 3px 0 0;
+}
+
+.barra-abajo{
+  margin-top: 25vh;
+}
+  
+  /* imagen de abajo */
+  .img-abajo {
+    margin: 10px auto 10px;
+    display: block;
+  }
+
+
+/* diseño de galeria  ------------------------------------------------ */
+
+  /* mover los a */
+  .mover-a{
+    float: right;
+}
+
+/* botes imaganes y videos */
+.boton1{
+  width: 100px;
+  border-radius: 10px;
+  background-color: #47874a;
+  color: #f4f4f4;
+  margin: 5px 2px;
+}
+.boton2{
+  width: 100px;
+  display: block;
+  border-radius: 10px;
+  background-color: #47874a;
+  color: #f4f4f4;
+  margin: 5px 2px;
+}
+
+/* botones editar eliminar */
+.boton3{
+  width: 100px;
+  border-radius: 10px;
+  background-color: #47874a;
+  color: #f4f4f4;
+  display: block;
+}
+i{
+    padding: 0 1px 0 0;
+}
+
+
+/* diseño de documentos------------------------------------------------------------ */
+
+/* mover los a */
+.mover-a{
+  float: right;
+}
+
+/* botes imaganes y videos */
+.boton1{
+width: 185px;
+border-radius: 10px;
+background-color: #47874a;
+color: #f4f4f4;
+margin: 5px 2px;
+}
+.boton2{
+width: 100px;
+display: block;
+border-radius: 10px;
+background-color: #47874a;
+color: #f4f4f4;
+margin: 5px 2px;
+}
+
+/* botones editar eliminar */
+.boton3{
+width: 100px;
+border-radius: 10px;
+background-color: #47874a;
+color: #f4f4f4;
+display: block;
+}
+
+
+/* diseño de categoria ---------------------------------------- */
+
+
+/* form    */
+.card-container.card {
+  /* max-width: 75%; */
+  border: none;
+}
+.card {
+  background-color: #ffffff;
+  padding: 0 0 5px;
+  margin: 0 auto 25px;
+  /* margin-top: 20vh; */
+}
+.form-signin #text {
+  height: 44px;
+  font-size: 16px;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+.categoria-color {
+  background-color: #47874a;
+  color: #ffffff;
+  width: 180px;
+} 
+.form-signin button {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #47874a;
+  color: #f4f4f4;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 640px) {
+  .form-signin #text{
+    width: 100%;
+  }
+  span{
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
+/* diseño de botones de comite --------------------------*/
+ /* botones editar eliminar */
+ .boton3{
+  width: 100px;
+  border-radius: 10px;
+  background-color: #47874a;
+  color: #f4f4f4;
+  display: block;
+}
+
+.form-signin #inputEmail,
+.form-signin #inputPassword {
+  height: 44px;
+  font-size: 16px;
+}
+.form-signin input[type="email"],
+.form-signin input[type="password"],
+.form-signin input[type="text"],
+.form-signin button {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+.btn-admin {
+    border-radius: 0;
+    height: 55px;
+    margin-bottom: 10px;
+    background-color: #47874a;
+    color: #f4f4f4;
+    font-size: 20px;
+}
+.btn-admin:hover{
+    border: 1px solid #47874a;
+    color: #47874a;
+}
+.text-center{
+    color: #47874a;
+}
+
+/**PIO*/
+.form{
+  margin: 20px auto;
+  max-width: 50vw;
+}
+.btn-form{
+  width: 10vw;
+}

@@ -1,3 +1,4 @@
+<!-- ESTA CLASE TIENE MÉTODOS PARA EL REGISTRO Y LOGIN DEL USUARIO. -->
 <?php
 session_start();
 include "../config/Connection.php";
@@ -5,14 +6,12 @@ include "../helper/Helper.php";
 class RegisterDB{
     public $cnx;
     public $helper;
-    function __construct(){
-        $this -> cnx = Connection::connectDB();
-        $this -> helper = new Helper();
-    }
-    function useHelper($file,$route){
-        return $this -> helper->uploadFile($file,$route);
+    function __construct(){ 
+        $this -> cnx = Connection::connectDB(); // Guarda la conexión en una variable para después usarla.
+        $this -> helper = new Helper(); // Crea una instancia de la clase auxiliar.
     }
 
+    // VERIFICA SI EXISTE UN ADMINISTRADOR
     function validateAdmin(){
         $sql = "SELECT * FROM administrador";
         $query = $this->cnx->prepare($sql);
@@ -21,6 +20,7 @@ class RegisterDB{
         }
     }
 
+    // REGISTRA UN ADMINISTRADOR Y ENCRIPTA LA CONTRASEÑA
     function checkInAdmin($nombre,$password){
         $sql = "INSERT INTO administrador(nombre, pass) VALUES (?,?)";
         $query = $this->cnx->prepare($sql);
@@ -28,8 +28,11 @@ class RegisterDB{
         $arrData = array($nombre,$encrypt);
         $insert = $query -> execute($arrData);
 
-        $this -> helper->validateInsert($insert,"El administrador se ha registrado, ahora por favor inicie sesión", "../admin");
+        // LLAMA UN MÉTODO DE LA CLASE AUXILIAR PARA MANDAR UNA ALERTA
+        $this -> helper->validateInsert($insert,"El administrador se ha registrado, ahora por favor inicie sesión", "../admin.php");
     }
+
+    // INICIO DE SESIÓN
     function login($nombre,$password){
         $sql = "SELECT * FROM administrador WHERE nombre = ?";
         $query = $this->cnx->prepare($sql);
@@ -37,7 +40,7 @@ class RegisterDB{
         if($query->execute()){
             foreach($query as $data){
                 if(password_verify($password,$data['pass'])){
-                    $_SESSION["admin"] = $data;
+                    $_SESSION["admin"] = $data; // GUARDA LA SESIÓN PARA USARLO DESPUÉS
                     header("Location: main.php");
                 }else{
                     ?>

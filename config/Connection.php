@@ -1,3 +1,4 @@
+<!-- ARCHIVO QUE CONECTA A LA BASE DE DATOS, HACE USO DE LAS VARIALBES DE global.php. -->
 <?php
     class Connection{
         static function connectDB(){

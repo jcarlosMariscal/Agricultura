@@ -1,3 +1,4 @@
+<!-- ARCHIVO QUE DEFIVE LAS VARIABLES PARA LA CONEXIÓN, RETORNA LOS VALORES -->
 <?php
     define("SERVIDOR","localhost");
     define("DATABASE", "congreso");

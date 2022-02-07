@@ -1,3 +1,4 @@
+<!-- CLASE CON FUNCIONES PARA ELIMINAR REGISTROS -->
 <?php
 include "../../config/Connection.php";
 include "../../helper/Helper.php";

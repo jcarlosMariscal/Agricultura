@@ -1,100 +1,30 @@
 <?php
+//  LLAMA A LA CLASE READ PARA USAR UNA FUNCIÓN QUE TRAIGA LOS REGISTROS Y IMPRIMIR EN PANTALLA
   require "Read.php";
   $query = new Read();
-  $galery = $query->readGalery();
+  $galery = $query->readGalery(); // Acceder al método.
 ?>
+
 <body>
+<div class="container bg">
+<div class="row">
   <?php
-    if($galery){
-      foreach($galery as $data){
-        $imagen = $data['archivo'];
-        $descripción = $data['descripcion'];
-        ?>
-        <div class="gallery">
-          <a target="_blank" href="<?php echo $data['archivo']; ?>">
-            <img src="<?php echo $data['archivo']; ?>" alt="Cinque Terre" width="600" height="400">
-          </a>
-          <div class="desc"><?php echo $data['descripcion'] ?></div>
-        </div>
-        <?php
+      if($galery){
+        foreach($galery as $data){
+          $imagen = $data['archivo'];
+          $descripción = $data['descripcion'];
+          ?>
+          <div class="gallery">
+            <a target="_blank" href="<?php echo $data['archivo']; ?>">
+              <img src="<?php echo $data['archivo']; ?>" alt="Cinque Terre" width="600" height="400" class="galery-img">
+            </a>
+            <div class="desc"><?php echo $data['descripcion'] ?></div>
+          </div>
+          <?php
+        }
       }
-    }
-  ?>
-        
-        <!-- <div class="gallery">
-          <a target="_blank" href="img/2.jpg">
-            <img src="img/2.jpg" alt="Forest" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/3.jpg">
-            <img src="img/3.jpg" alt="Northern Lights" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/4.jpg">
-            <img src="img/4.jpg" alt="Mountains" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-
-        <div class="gallery">
-          <a target="_blank" href="img/5.jpg">
-            <img src="img/5.jpg" alt="Cinque Terre" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/6.jpg">
-            <img src="img/6.jpg" alt="Forest" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/1.jpg">
-            <img src="img/1.jpg" alt="Northern Lights" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/7.jpg">
-            <img src="img/7.jpg" alt="Mountains" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-
-        <div class="gallery">
-          <a target="_blank" href="img/1.jpg">
-            <img src="img/1.jpg" alt="Cinque Terre" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/4">
-            <img src="img/4.jpg" alt="Forest" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="3.jpg">
-            <img src="img/3.jpg" alt="Northern Lights" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div>
-        
-        <div class="gallery">
-          <a target="_blank" href="img/4.jpg">
-            <img src="img/4.jpg" alt="Mountains" width="600" height="400">
-          </a>
-          <div class="desc">Add a description of the image here</div>
-        </div> -->
+    ?>
+</div>
+</div>
 </body>
+      <br>
