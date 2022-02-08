@@ -19,7 +19,7 @@
           <th scope="col">E-mail</th>
           <th scope="col">Teléfono</th>
           <th scope="col"></th>
-          <th scope="col"><a class="boton3 btn" href="create/createGalery.php"><i class="bi bi-plus-lg"></i>Agregar</a></th>
+          <th scope="col"><a class="boton3 btn" href="create/createDirectory.php"><i class="bi bi-plus-lg"></i>Agregar</a></th>
         </tr>
       </thead>
       <tbody>
@@ -30,12 +30,12 @@
                 ?>
                   <tr>
                     <td><?php echo $data["id_directorio"]; ?></td>
-                    <td><?php echo $data["nombre"]; ?></td>
+                    <td><a href="<?php echo $data['url']; ?>" target="_blank"><?php echo $data["nombre"]; ?></a></td>
                     <td><?php echo $data["estado"];; ?></td>
                     <td><?php echo $data["carrera"]; ?></td>
                     <td><?php echo $data["email"]; ?></td>
                     <td><?php echo $data["telefono"]; ?></td>
-                    <td><a class="boton3 btn" href='update/updateGalery.php?id_directorio=<?php echo $data['id_directorio']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td>
+                    <td><a class="boton3 btn" href='update/updateDirectory.php?id_directorio=<?php echo $data['id_directorio']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td>
                     <td><a class="boton3 btn" href='delete/receivedData.php?id_directorio=<?php echo $data['id_directorio']?>&&table=directorio'><i class="bi bi-trash"></i>Eliminar</a></td>
                   </tr>
                 <?php

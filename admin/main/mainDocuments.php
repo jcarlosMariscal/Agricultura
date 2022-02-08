@@ -32,18 +32,18 @@
                     <td><?php echo $data["id_documento"]; ?></td>
                     <td><?php echo $data["nombre"]; ?></td>
                     <td><?php echo $data["descripcion"];; ?></td>
-                    <td><a href="../<?php echo $data['archivo']; ?>">Ver</a></td>
+                    <td><a href="../<?php echo $data['archivo']; ?>" target="_blank">Ver</a></td>
                     <td>
                       <?php 
-                      if($data["privacidad" === 1]){
+                      if($data["privacidad"] === 1){
                         echo "Público";
-                      }else if($data["privacidad" === 2]){
+                      }else if($data["privacidad"] === 2){
                         echo "Privado";
                       }
                       ?>
                     </td>
-                    <td>0000-00-00 00:00:00</td>
-                    <td><a class="boton3 btn" href='update/updateGalery.php?id_documento=<?php echo $data['id_documento']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td>
+                    <td><?php echo $data['fecha']; ?></td>
+                    <td><a class="boton3 btn" href='update/updateDocuments.php?id_documento=<?php echo $data['id_documento']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td>
                     <td><a class="boton3 btn" href='delete/receivedData.php?id_documento=<?php echo $data['id_documento']?>&&table=documento'><i class="bi bi-trash"></i>Eliminar</a></td>
                   </tr>
                 <?php

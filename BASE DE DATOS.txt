@@ -53,3 +53,62 @@ categoria INT NOT NULL,
 fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT FOREIGN KEY (categoria) REFERENCES categoria(id_categoria) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+--------------------------------------- NUEVA BD (Para que les funcione el nuevo código usen esta)--------------------------------------------------------
+
+Create database congreso;
+use congreso;
+
+CREATE TABLE directorio(
+id_directorio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nombre VARCHAR (60) NOT NULL,
+url VARCHAR (200) NOT NULL,
+estado VARCHAR (100) NOT NULL,
+carrera VARCHAR(100) NOT NULL,
+email VARCHAR (100) NOT NULL,
+telefono VARCHAR(20) NULL
+);
+
+CREATE TABLE documento(
+id_documento INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nombre VARCHAR(100) NOT NULL,
+descripcion VARCHAR(255),
+archivo VARCHAR(200) NOT NULL,
+privacidad SMALLINT NOT NULL,
+fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE categoria(
+id_categoria INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+categoria VARCHAR (100) NOT NULL
+);
+
+CREATE TABLE noticia(
+id_noticia INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+titulo VARCHAR(100) NOT NULL,
+texto TEXT NOT NULL,
+descripcion VARCHAR(200) NOT NULL,
+categoria INT NOT NULL,
+fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT FOREIGN KEY (categoria) REFERENCES categoria(id_categoria) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE galeria(
+id_foto INT primary key auto_increment NOT NULL,
+nom_foto varchar(60) NOT NULL,
+archivo VARCHAR(200) NULL,
+descripcion VARCHAR (255) NOT NULL,
+fecha_publi DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+fecha_modi DATETIME NOT NULL,
+id_noticia INT NULL,
+CONSTRAINT FOREIGN KEY (id_noticia) REFERENCES noticia(id_noticia) ON DELETE CASCADE ON UPDATE CASCADE  
+);
+
+CREATE TABLE administrador(
+nombre VARCHAR (60) NOT NULL,
+pass VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE acceso_doc(
+pass VARCHAR(255) NOT NULL
+);

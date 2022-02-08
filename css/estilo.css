@@ -307,29 +307,6 @@ text-align: center;
 }
 /*galeria*/
 
-/*formulario de contacto-----------------*/
-.login_box {
-  border: 3px solid #f4f4f4;
-  padding-left: 15px;
-  margin-bottom: 25px;
-}
-.logo {
-  padding: 10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.card-container.card {
-  max-width: 600px;
-}
-
-.card {
-  background-color: #ffffff;
-  padding: 1px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 15px;
-}
-
 /*****estilo Peralta******/
 
 /*slider */
@@ -451,3 +428,27 @@ text-align: center;
   color: red;
 }
 /*---------------------------------LOGIN-----------------------------------------------*/
+
+/* ------------------ FORMULARIO LOGIN - admin.php ----------------------------------*/
+.login_box {
+  border: 3px solid #f4f4f4;
+  padding-left: 15px;
+  margin-bottom: 25px;
+}
+.logo {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-container.card {
+  max-width: 600px;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 1px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 15px;
+}
+/* ------------------ FORMULARIO LOGIN - admin.php ----------------------------------*/

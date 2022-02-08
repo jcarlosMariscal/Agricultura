@@ -1,4 +1,14 @@
-<!-- FORMULARIO PARA CREAR DOCUMENTOS -->
+<!-- FORMULARIO PARA CREAR CATEGORIA -->
+<?php
+    require "Update.php";
+    $query = new Update();
+    $id_categoria = $_GET['id_categoria'];
+    $category = $query->readCategory($id_categoria);
+    if($category){
+        $result = $category->fetch();
+        $categoria = $result['categoria'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,40 +39,18 @@
         </div>
 
         <div class="container">
-            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Documento </h1>
+            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Modificar Categoria </h1>
 
             <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="documento">
+                <input type="hidden" name="table" value="categoria">
+                <input type="hidden" name="id_categoria" value="<?php echo $id_categoria; ?>">
                 <div class="card card-container">
                         <div class="center-input input-group">
-                            <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE:</span>
-                            <input id="text" type="text" name="nombre"  class="form-control"  required placeholder="Ingresar nombre del documento."  aria-label="Username" aria-describedby="basic-addon1">
+                            <span class="categoria-color input-group-text" id="basic-addon1">CATEGORIA:</span>
+                            <input id="text" type="text" name="categoria"  class="form-control"  required value="<?php echo $categoria; ?>"  aria-label="Username" aria-describedby="basic-addon1">
                             <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                             <span class="msj"></span>
                         </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
-                        <input id="text" type="text" name="descripcion" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
-                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
-                        <span class="msj"></span>
-                    </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
-                        <input id="text" type="file" name="archivo" accept=".pdf" class="" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">PRIVACIDAD:</span>
-                        <select name="privacidad" id="privacidad">
-                            <option value="1">Público</option>
-                            <option value="2">Privado</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="form-signin btn-form">
                     <button class="btn" type="submit">Registrar</button>

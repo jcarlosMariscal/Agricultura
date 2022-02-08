@@ -1,17 +1,18 @@
 <?php 
 require "Update.php";
 $query = new Update();
-$id = $_GET['id_foto'];
+$id = $_GET['id_noticia'];
 
-$galery = $query -> readGalery($id);
-if($galery){
-    foreach($galery as $data){
-        $nom_foto = $data['nom_foto'];
-        $archivo = $data['archivo'];
+$news = $query -> readNews($id);
+$category = $query->readCategoryForm();
+if($news){
+    foreach($news as $data){
+        $titulo = $data['titulo'];
+        $texto = $data['texto'];
         $descripcion = $data['descripcion'];
+        $categoria = $data['categoria'];
     }
 }
-$fecha_modi = strftime( "%Y-%m-%d %H-%M-%S");
 ?>
 
 <!DOCTYPE html>
@@ -44,39 +45,57 @@ $fecha_modi = strftime( "%Y-%m-%d %H-%M-%S");
         </div>
 
         <div class="container">
-            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Modificar Imagen: <?php echo $nom_foto; ?> </h1>
+            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Modificar Noticia: <?php echo $titulo; ?> </h1>
 
             <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="galeria">
-            <input type="hidden" name="id_foto" value="<?php echo $_GET['id_foto'] ?>" id="nombre" class="form-control bg-secondary text-white text-center">
+                <input type="hidden" name="table" value="noticia">
+                <input type="hidden" name="id_noticia" value="<?php echo $_GET['id_noticia'] ?>" id="nombre" class="form-control bg-secondary text-white text-center">
                 <div class="card card-container">
                         <div class="center-input input-group">
-                            <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE DE FOTO:</span>
-                            <input id="text" type="text" name="nom_foto" value="<?php echo $nom_foto ?>" class="form-control"  required aria-label="Username" aria-describedby="basic-addon1">
+                            <span class="categoria-color input-group-text" id="basic-addon1">TITULO:</span>
+                            <input id="text" type="text" name="titulo"  class="form-control"  required value="<?php echo $titulo; ?>"  aria-label="Username" aria-describedby="basic-addon1">
+                            <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                            <span class="msj"></span>
+                        </div>
+                </div>
+                <div class="card card-container">
+                        <div class="center-input input-group">
+                            <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
+                            <input id="text" type="text" name="descripcion"  class="form-control"  required value="<?php echo $descripcion; ?>"  aria-label="Username" aria-describedby="basic-addon1">
                             <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                             <span class="msj"></span>
                         </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
-                        <input id="text" type="text" name="descripcion" value="<?php echo $descripcion; ?>" class="form-control" required aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="categoria-color input-group-text" id="basic-addon1">CONTENIDO:</span>
+                        <textarea id="text" type="text" name="texto" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1"><?php echo $texto;?></textarea>
                         <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                         <span class="msj"></span>
                     </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">FECHA MODIFICACIÓN:</span>
-                        <input id="hidden" type="text" name="fecha_modi" value="<?php echo $fecha_modi; ?>" class="form-control" required aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="categoria-color input-group-text" id="basic-addon1">CATEGORIA:</span>
+                        <?php
+                            if($category){
+                                ?><select name="categoria" id="categoria"><?php
+                                foreach($category as $data){
+                                    if($data['id_categoria'] === $categoria){
+                                        ?><option value="<?php echo $data['id_categoria']; ?>" selected><?php echo $data['categoria']; ?></option><?php
+                                        
+                                    }
+                                    if($data['id_categoria'] != $categoria){
+                                        ?>
+                                        <option value="<?php echo $data['id_categoria']; ?>"><?php echo $data['categoria']; ?></option>
+                                        <?php
+                                    }
+                                }
+                                ?></select><?php
+                            }
+                        ?>
                         <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                         <span class="msj"></span>
-                    </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
-                        <input id="text" type="file" name="archivo" class="" aria-label="Username" aria-describedby="basic-addon1" accept="image/*">
                     </div>
                 </div>
                 <div class="form-signin btn-form">

@@ -13,8 +13,8 @@
 <body>
     <div class="container">
         <div class="letra">
-            <img class="imagen img-fluid" src="../img/comite.png" alt="" width="200px">
-            COMITE NACIONAL DE AGRICULTURA PROTEGIDA Y SUSTENTABLE
+            <img class="imagen img-fluid" src="../img/comite.png" alt="">
+            <h3>COMITE NACIONAL DE AGRICULTURA PROTEGIDA Y SUSTENTABLE</h3>
         </div>
         <hr size="10" style="background: green;">
     </div>

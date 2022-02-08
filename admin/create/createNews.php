@@ -1,4 +1,9 @@
-<!-- FORMULARIO PARA CREAR DOCUMENTOS -->
+<!-- FORMULARIO PARA AGREGAR UNA NOTICIA -->
+<?php
+    include "Create.php";
+    $query = new Create();
+    $category = $query->readCategory();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,43 +34,54 @@
         </div>
 
         <div class="container">
-            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Documento </h1>
+            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Noticia </h1>
 
             <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="documento">
+                <input type="hidden" name="table" value="noticia">
                 <div class="card card-container">
                         <div class="center-input input-group">
-                            <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE:</span>
-                            <input id="text" type="text" name="nombre"  class="form-control"  required placeholder="Ingresar nombre del documento."  aria-label="Username" aria-describedby="basic-addon1">
+                            <span class="categoria-color input-group-text" id="basic-addon1">TITULO:</span>
+                            <input id="text" type="text" name="titulo"  class="form-control"  required placeholder="Ingresar nombre."  aria-label="Username" aria-describedby="basic-addon1">
+                            <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                            <span class="msj"></span>
+                        </div>
+                </div>
+                <div class="card card-container">
+                        <div class="center-input input-group">
+                            <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
+                            <input id="text" type="text" name="descripcion"  class="form-control"  required placeholder="Ingresar nombre."  aria-label="Username" aria-describedby="basic-addon1">
                             <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                             <span class="msj"></span>
                         </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
-                        <input id="text" type="text" name="descripcion" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="categoria-color input-group-text" id="basic-addon1">CONTENIDO:</span>
+                        <textarea id="text" type="text" name="texto" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1"></textarea>
                         <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                         <span class="msj"></span>
                     </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
-                        <input id="text" type="file" name="archivo" accept=".pdf" class="" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">PRIVACIDAD:</span>
-                        <select name="privacidad" id="privacidad">
-                            <option value="1">Público</option>
-                            <option value="2">Privado</option>
-                        </select>
+                        <span class="categoria-color input-group-text" id="basic-addon1">CATEGORIA:</span>
+                        <?php
+                            if($category){
+                                ?><select name="categoria" id="categoria"><?php
+                                foreach($category as $data){
+                                    ?>
+                                        <option value="<?php echo $data['id_categoria']; ?>"><?php echo $data['categoria']; ?></option>
+                                    <?php
+                                }
+                                ?></select><?php
+                            }
+                        ?>
+                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                        <span class="msj"></span>
                     </div>
                 </div>
                 <div class="form-signin btn-form">
-                    <button class="btn" type="submit">Registrar</button>
+                    <button class="btn" type="submit">Ingresar</button>
                 </div>
             </form>
     </div>
@@ -76,4 +92,4 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </footer><div class="barra-abajo">
 </body>
-</html>
+

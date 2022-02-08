@@ -1,4 +1,15 @@
 <!-- FORMULARIO PARA AGREGAR UNA IMAGEN A LA GALERIA -->
+<?php
+    include "Create.php";
+    $query = new Create();
+    $id_noticia = $_GET['id_noticia'];
+    $titleNews = $query->readTitleNews($id_noticia);
+    if($titleNews){
+        $result = $titleNews->fetch();
+        $title = $result['titulo'];
+    }
+    $images = $query->readImages();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,38 +40,28 @@
         </div>
 
         <div class="container">
-            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Imagen </h1>
-
+            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Seleccione imagenes para la noticia "<b><?php echo $title; ?></b>"</h1>
             <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="galeria">
-                <div class="card card-container">
-                        <div class="center-input input-group">
-                            <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE DE FOTO:</span>
-                            <input id="text" type="text" name="nom_foto"  class="form-control"  required placeholder="Ingresar nombre."  aria-label="Username" aria-describedby="basic-addon1">
-                            <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
-                            <span class="msj"></span>
-                        </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
-                        <input id="text" type="text" name="descripcion" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
-                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
-                        <span class="msj"></span>
-                    </div>
-                </div>
-                <div class="card card-container">
-                    <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
-                        <input id="text" type="file" name="archivo" class="" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
+                <input type="hidden" name="table" value="imageNews">
+                <input type="hidden" name="id_noticia" value="<?php echo $id_noticia; ?>">
+                <?php
+                    if($images){
+                        foreach($images as $data){
+                        ?>
+                        <label for="">
+                            <input type="checkbox" id="" name="id_foto[]" value="<?php echo $data['id_foto']; ?>"><?php echo $data['nom_foto']; ?></label>
+                            <img src="../../<?php echo $data['archivo'];?>" alt="<?php echo $data['nom_foto']; ?>" width="100" heiht="100">
+                        </label>
+                        <?php
+                        }
+                    }
+                ?>
+                <br><br><br>
                 <div class="form-signin btn-form">
-                    <button class="btn" type="submit">Ingresar</button>
+                    <button class="btn" type="submit">Registrar</button>
                 </div>
             </form>
-    </div>
-
+        </div>
     <footer>
         <hr size="10" style="background: green;">
         <img class="img-abajo img-fluid" src="../../img/comite.png" width="200px" alt="">

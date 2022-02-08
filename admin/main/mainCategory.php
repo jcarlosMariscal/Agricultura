@@ -15,7 +15,7 @@
           <th scope="col">#</th>
           <th scope="col">Categoria</th>
           <th scope="col"></th>
-          <th scope="col"><a class="boton3 btn" href="create/createGalery.php"><i class="bi bi-plus-lg"></i>Agregar</a></th>
+          <th scope="col"><a class="boton3 btn" href="create/createCategory.php"><i class="bi bi-plus-lg"></i>Agregar</a></th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,7 @@
                   <tr>
                     <td><?php echo $data["id_categoria"]; ?></td>
                     <td><?php echo $data["categoria"]; ?></td>
-                    <td><a class="boton3 btn" href='update/updateGalery.php?id_categoria=<?php echo $data['id_categoria']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td> <!-- EDITAR CATEGORIA CON SU ID -->
+                    <td><a class="boton3 btn" href='update/updateCategory.php?id_categoria=<?php echo $data['id_categoria']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td> <!-- EDITAR CATEGORIA CON SU ID -->
                     <td><a class="boton3 btn" href='delete/receivedData.php?id_categoria=<?php echo $data['id_categoria']?>&&table=categoria'><i class="bi bi-trash"></i>Eliminar</a></td> <!-- ELIMINAR CATEGORIA CON SU ID -->
                   </tr>
                 <?php

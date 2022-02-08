@@ -1,4 +1,4 @@
-<!-- FORMULARIO PARA CREAR DOCUMENTOS -->
+<!-- FORMULARIO PARA AGREGAR UN COMITÉ AL DIRECTORIO -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,43 +29,60 @@
         </div>
 
         <div class="container">
-            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Documento </h1>
+            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Directorio </h1>
 
             <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="documento">
+                <input type="hidden" name="table" value="directorio">
                 <div class="card card-container">
                         <div class="center-input input-group">
                             <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE:</span>
-                            <input id="text" type="text" name="nombre"  class="form-control"  required placeholder="Ingresar nombre del documento."  aria-label="Username" aria-describedby="basic-addon1">
+                            <input id="text" type="text" name="nombre"  class="form-control"  required placeholder="Ingresar nombre."  aria-label="Username" aria-describedby="basic-addon1">
                             <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                             <span class="msj"></span>
                         </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
-                        <input id="text" type="text" name="descripcion" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="categoria-color input-group-text" id="basic-addon1">SITIO OFICIAL:</span>
+                        <input id="text" type="text" name="url" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
                         <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
                         <span class="msj"></span>
                     </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
-                        <input id="text" type="file" name="archivo" accept=".pdf" class="" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="categoria-color input-group-text" id="basic-addon1">ESTADO:</span>
+                        <input id="text" type="text" name="estado" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                        <span class="msj"></span>
                     </div>
                 </div>
                 <div class="card card-container">
                     <div class="center-input input-group">
-                        <span class="categoria-color input-group-text" id="basic-addon1">PRIVACIDAD:</span>
-                        <select name="privacidad" id="privacidad">
-                            <option value="1">Público</option>
-                            <option value="2">Privado</option>
-                        </select>
+                        <span class="categoria-color input-group-text" id="basic-addon1">CARRERA:</span>
+                        <input id="text" type="text" name="carrera" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                        <span class="msj"></span>
+                    </div>
+                </div>
+                <div class="card card-container">
+                    <div class="center-input input-group">
+                        <span class="categoria-color input-group-text" id="basic-addon1">E-MAIL:</span>
+                        <input id="text" type="text" name="email" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                        <span class="msj"></span>
+                    </div>
+                </div>
+                <div class="card card-container">
+                    <div class="center-input input-group">
+                        <span class="categoria-color input-group-text" id="basic-addon1">TELÉFONO:</span>
+                        <input id="text" type="text" name="telefono" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
+                        <span class="msj"></span>
                     </div>
                 </div>
                 <div class="form-signin btn-form">
-                    <button class="btn" type="submit">Registrar</button>
+                    <button class="btn" type="submit">Ingresar</button>
                 </div>
             </form>
     </div>
@@ -76,4 +93,4 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </footer><div class="barra-abajo">
 </body>
-</html>
+
