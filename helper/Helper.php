@@ -1,8 +1,8 @@
-<!-- CLASE AUXILIAR, CONTIENE FUNCIONES QUE REALIZAN CIERTA FUNCIÓN, SI SE NECESITA EN ALGUNA SECCIÓN SOLO SE INVOCA -->
 <?php
+// <!-- CLASE AUXILIAR, CONTIENE FUNCIONES QUE REALIZAN CIERTA FUNCIÓN, SI SE NECESITA EN ALGUNA SECCIÓN SOLO SE INVOCA -->
 class Helper{
     // VALIDA SI SE INSERTO UN REGISTRO, MANDA UN MENSAJE EXITOSO O ERRÓNEO AL ADMINISTRADOR Y LO REDIRECCIONA A OTRA PÁGINA.
-    function validateInsert($insert,$message,$redirectTo){ 
+    function validateInsert($insert,$message,$redirectTo){ // YA NO SIRVE
 
         if(!$insert){
             echo '<script language="javascript">alert("Algo salió mal, no se pudo insertar en la base de datos");

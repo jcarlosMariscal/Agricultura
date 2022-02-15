@@ -448,7 +448,7 @@ text-align: center;
 .card {
   background-color: #ffffff;
   padding: 1px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 15px;
+  /* margin: 0 auto 25px; */
+  /* margin-top: 15px; */
 }
 /* ------------------ FORMULARIO LOGIN - admin.php ----------------------------------*/

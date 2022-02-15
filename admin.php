@@ -33,12 +33,28 @@ if (isset($_SESSION["admin"])){
             // VALIDAR SI EXISTE UN ADMINISTRADOR
         ?>
         <hr size="4" style="color: #47874a;">
-        <form id="form" method="post" class="form-signin" action="admin/receivedData.php">
-            <input type="text" name="table" value="login" hidden>
-            <input type="text" name="nombre" class="login_box" placeholder="Ingrese su nombre"   autofocus>
-            <input type="password" name="password" class="login_box" placeholder="Ingrese su contraseña" required>
-            <button class="btn-admin" type="submit">Iniciar sesión</button>
+        <form class="form-signin" id="admin">
+            <div >
+                <input type="text" name="table" value="login" hidden>
+            </div>
+            <div id="group-nombre">
+                <input type="text" name="nombre" id="nombre" class="login_box" placeholder="Ingrese su nombre">
+                <p class="formInputError">El nombre no debe estar vacío, debe tener un mínimo de 3 y un máximo de 30 caracteres.</p>
+            </div>
+            <div id="group-password">
+                <input type="password" name="password" id="password" class="login_box" placeholder="Ingrese su contraseña">
+                <p class="formInputError">La contraseña debe tener mínimo 8 caracteres, al menos una letra y un número</p>
+            </div>
+
+            <div class="formOneGrupo formMensaje" id="formulario-mensaje">
+                <p><i class="fas fa-exclamation-triangle"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
+            </div>
+            <div class="formOneGrupo formMensaje" id="error-datos">
+                <p><b>Error: </b>No se pudo iniciar sesión, verifique que sus datos sean correctos.</p>
+            </div>
+            <button class="btn-admin" type="submit" id="button">Iniciar sesión</button>
         </form>
     </div>
 </div>
 <!-- FORMULARIO DE INICIO DE SESIÓN DEL ADMINISTRADOR -->
+<script src="js/validate.js" type="module"></script>

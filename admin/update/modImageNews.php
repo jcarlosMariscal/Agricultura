@@ -1,14 +1,14 @@
 <!-- FORMULARIO PARA AGREGAR UNA IMAGEN A LA GALERIA -->
 <?php
-    include "Create.php";
-    $query = new Create();
+    include "Update.php";
+    $query = new Update();
     $id_noticia = $_GET['id_noticia'];
     $titleNews = $query->readTitleNews($id_noticia);
     if($titleNews){
         $result = $titleNews->fetch();
         $title = $result['titulo'];
     }
-    $images = $query->readImages();
+    $images = $query->readImages($id_noticia);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,7 +26,6 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- SELECCIÓN DE IMAGENES PARA LA NOTICIA -->
     <div class="container">
         <div class="letra">
             <img class="imagen img-fluid" src="../../img/comite.png" alt="" width="200px">
@@ -45,19 +44,14 @@
 
         <div class="container">
             <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Seleccione imagenes para la noticia "<b><?php echo $title; ?></b>"</h1>
-            <?php
-                $t = $images->rowCount();
-                if($images->rowCount() === 0){
-                    ?><p style="color: red">Ya no hay imágenes libres en la galería, agregue más y vuelva aquí después. <a href="../main.php">Ir a galeria</a></p><?php
-                }else{
-                    ?><p style="color: red">Se muestran imágenes que no tienen una noticia, si no encuentra la imagen que busca por favor agreguela a la galeria.</p><?php
-                }
-            ?>
+            <p style="color: red">Estas son las imágenes actuales de la noticia</p>
+            <a href="../create/addImageNews.php?id_noticia=<?php echo $id_noticia; ?>">Agregar otra imagen</p>
             <form id="formNoEditor" enctype="multipart/form-data" class ="form">
                 <input type="hidden" name="table" value="imageNews">
                 <input type="hidden" name="id_noticia" value="<?php echo $id_noticia; ?>">
                 <div class="container bg">
                     <div class="row cuadro">
+                        <input type="hidden" name="total" id="total" value="<?php echo $images->rowCount();?>">
                     <?php
                         if($images){
                             $id = 1;
@@ -65,7 +59,7 @@
                             ?>
                             <div class="image gal">
                                 <img src="../../<?php echo $data['archivo'];?>" alt="<?php echo $data['nom_foto']; ?>" class="img-thumbnail">
-                                <input type="checkbox" id="check<?php echo $id; ?>" name="id_foto" value="<?php echo $data['id_foto']; ?>" class="check_foto">
+                                <input type="checkbox" id="check<?php echo $id; ?>" name="id_foto" value="<?php echo $data['id_foto']; ?>" class="check_foto" checked>
                                 <!-- <p><?php echo $data['id_foto']; ?></p> -->
                                 <label class="check" for="check">Seleccionar</label>
                             </div>
@@ -87,6 +81,6 @@
         <img class="img-abajo img-fluid" src="../../img/comite.png" width="200px" alt="">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </footer><div class="barra-abajo">
-    <script src="../../js/validate.js" type="module"></script>
+    <script src="../../js/update.js" type="module"></script>
 </body>
 

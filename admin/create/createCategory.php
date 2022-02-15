@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../css/admin.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 <body>
@@ -31,18 +32,22 @@
         <div class="container">
             <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Categoria </h1>
 
-            <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="categoria">
+            <form id="formNoEditor" enctype="multipart/form-data" class ="form">
+                <div>
+                    <input type="hidden" name="table" value="categoria">
+                </div>
                 <div class="card card-container">
-                        <div class="center-input input-group">
+                        <div class="center-input input-group" id="group-categoria">
                             <span class="categoria-color input-group-text" id="basic-addon1">CATEGORIA:</span>
                             <input id="text" type="text" name="categoria"  class="form-control"  required placeholder="Ingresar la categoria"  aria-label="Username" aria-describedby="basic-addon1">
-                            <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
-                            <span class="msj"></span>
+                            <p class="formInputError">La categoria debe tener un mínimo de 5 caracteres y no debe exceder de 100. Se permiten caracteres especiales como #, @, $, %, &, (, ).</p>
                         </div>
                 </div>
+                <div class="formGrupo formMensaje" id="formulario-mensaje">
+                    <p><i class="fas fa-exclamation-triangle"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
+                </div>
                 <div class="form-signin btn-form">
-                    <button class="btn" type="submit">Registrar</button>
+                    <button class="btn" type="submit" id="button">Guardar</button>
                 </div>
             </form>
     </div>
@@ -52,5 +57,6 @@
         <img class="img-abajo img-fluid" src="../../img/comite.png" width="200px" alt="">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </footer><div class="barra-abajo">
+    <script src="../../js/validate.js" type="module"></script>
 </body>
 </html>

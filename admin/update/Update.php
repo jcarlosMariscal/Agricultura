@@ -1,5 +1,5 @@
-<!-- CLASE PARA MODIFICAR REGISTROS, ACCEDE A LA CLASE AUXILIAR Y TIENE MÉTODOS QUE USARÁN PARA MODIFICAR REGISTROS DE ACUERDO A LA TABLA -->
 <?php
+// <!-- CLASE PARA MODIFICAR REGISTROS, ACCEDE A LA CLASE AUXILIAR Y TIENE MÉTODOS QUE USARÁN PARA MODIFICAR REGISTROS DE ACUERDO A LA TABLA -->
 include "../../config/Connection.php"; // INCLUIR CONEXIÓN
 include "../../helper/Helper.php"; // INCLUIR CLASE AUXILIAR
 class Update{
@@ -113,5 +113,37 @@ class Update{
         $this -> helper->validateInsert($insert,"El registro se  ha modificado", "../main.php?p=directorio");
     }
     // RECIBE LOS NUEVOS DATOS PARA ACTUALIZARLOS
+
+    function readImages($id_noticia){
+        $sql = "SELECT id_foto,nom_foto,archivo FROM galeria WHERE id_noticia = ?";
+        $query = $this->cnx->prepare($sql);
+        $query->bindParam(1,$id_noticia);
+        if($query->execute()){
+            return $query;
+        }
+    }
+
+    function readTitleNews($id_noticia){
+        $sql = "SELECT titulo FROM noticia WHERE id_noticia = ?";
+        $query = $this->cnx->prepare($sql);
+        $query -> bindParam(1, $id_noticia);
+        if($query->execute()){
+            return $query;
+        }
+    }
+
+    //----------------------------
+    function deleteImageNews($id_foto){
+        try {
+            $sql = "UPDATE galeria SET id_noticia = ? WHERE id_foto = ?";
+            $query = $this->cnx->prepare($sql);
+            $arrData = array(NULL, $id_foto);
+            $delete = $query -> execute($arrData);
+            echo "successImageNews";
+        } catch (PDOException $th) {
+            echo "errorImageNews";
+        }
+    }
+    //----------------------------
 }
 ?>

@@ -1,5 +1,5 @@
-<!-- ARCHIVO QUE DEFIVE LAS VARIABLES PARA LA CONEXIÓN, RETORNA LOS VALORES -->
 <?php
+// <!-- ARCHIVO QUE DEFIVE LAS VARIABLES PARA LA CONEXIÓN, RETORNA LOS VALORES -->
     define("SERVIDOR","localhost");
     define("DATABASE", "congreso");
     define("USERNAME","root");

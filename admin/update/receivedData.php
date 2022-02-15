@@ -1,6 +1,6 @@
-<!-- RECIBE TODOS LOS DATOS A ACTUALIZAR, DEPENDIENDO DE LA TABLA, LLAMA A UNA FUNCIÓN ESPECIFICA DE LA CLASE PARA HACER LA MODIFICACIÓN-->
 <?php
-require "Update.php";
+// <!-- RECIBE TODOS LOS DATOS A ACTUALIZAR, DEPENDIENDO DE LA TABLA, LLAMA A UNA FUNCIÓN ESPECIFICA DE LA CLASE PARA HACER LA MODIFICACIÓN-->
+include "Update.php";
 $query = new Update();
 $table = $_POST['table']; // SE GUARDA EL VALOR DE LA TABLA QUE SE RECIBE DESDE EL FORMULARIO.
 if($table === "galeria"){ 
@@ -32,6 +32,32 @@ if($table ==="noticia"){
     $descripcion = $_POST['descripcion'];
     $categoria = $_POST['categoria'];
     $query -> updateNews($titulo,$texto,$descripcion,$categoria,$id_noticia);
+}
+if($table === "imageNews"){
+    $id_noticia = $_POST['id_noticia'];
+    if(isset($_POST['id_foto'])){
+        $id_foto = $_POST['id_foto'];
+        $getArr = $id_foto[0];
+        $array = explode ( ',', $getArr);
+        
+        $images = $query->readImages($id_noticia);
+        $imgBD = [];
+        if($images){
+            $i = 1;
+            foreach($images as $data){
+                $imgBD[$i] = $data['id_foto'];
+                $i++;
+            }
+        }
+        $res = array_diff($imgBD,$array);
+        // print_r($res);
+        if(count($res) === 0){
+            echo "NoSelection";
+        }
+        foreach($res as $image){	
+            $query->deleteImageNews($image);
+        };
+    }
 }
 
 if($table === "documento"){

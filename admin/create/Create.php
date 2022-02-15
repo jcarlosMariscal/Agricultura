@@ -1,5 +1,5 @@
-<!-- CLASE CON MÉTODOS PARA CREAR REGISTROS -->
 <?php
+// <!-- CLASE CON MÉTODOS PARA CREAR REGISTROS -->
 include "../../config/Connection.php";
 include "../../helper/Helper.php";
 class Create{
@@ -16,84 +16,96 @@ class Create{
     function getRoute($file,$route){
         return $this->helper->generateRoute($file,$route);
     }
-    //  ------------------OBTENER FUNCIONES AUXILIARES ------------------
 
     //  ------------------INSERTAR IMAGEN A GALERIA ------------------
     function createGalery($nom_foto,$archivo,$descripcion){
-        $sql = "INSERT INTO galeria(nom_foto, archivo, descripcion) VALUES (?,?,?)";
-        $query = $this->cnx->prepare($sql);
-        $arrData = array($nom_foto,$archivo,$descripcion);
-        $insert = $query -> execute($arrData);
-
-        $this -> helper->validateInsert($insert,"La imagen se ha agregado", "../main.php?p=galeria");
+        try {
+            $sql = "INSERT INTO galeria(nom_foto, archivo, descripcion) VALUES (?,?,?)";
+            $query = $this->cnx->prepare($sql);
+            $arrData = array($nom_foto,$archivo,$descripcion);
+            $insert = $query -> execute($arrData);
+            echo "successGal";
+        } catch (PDOException $th) {
+            echo "errorGal";
+        }
     }
-    //  ------------------INSERTAR IMAGEN A GALERIA ------------------
 
     //  ------------------INSERTAR CATEGORIA ------------------
     function createCategory($categoria){
-        $sql = "INSERT INTO categoria(categoria) VALUES (?)";
-        $query = $this->cnx->prepare($sql);
-        $arrData = array($categoria);
-        $insert = $query -> execute($arrData);
-
-        $this -> helper->validateInsert($insert,"La categoria se ha agregado", "../main.php?p=categoria");
+        try {
+            $sql = "INSERT INTO categoria(categoria) VALUES (?)";
+            $query = $this->cnx->prepare($sql);
+            $arrData = array($categoria);
+            $insert = $query -> execute($arrData);
+            echo "successCat";
+        } catch (PDOException $th) {
+            echo "errorCat";
+        }
     }
-    //  ------------------ INSERTAR CATEGORIA ------------------
 
     //  ------------------INSERTAR NOTICIA ------------------
     function createNews($titulo,$texto,$descripcion,$categoria){
-        $sql = "INSERT INTO noticia(titulo, texto, descripcion, categoria) VALUES (?,?,?,?)";
-        $query = $this->cnx->prepare($sql);
-        $arrData = array($titulo,$texto,$descripcion,$categoria);
-        $insert = $query -> execute($arrData);
-        
-        $this -> helper->validateInsert($insert,"La noticia se ha agregado, por favor seleccione una imagen de la galeria para la noticia", "../main.php?p=noticias");
+        try {
+            $sql = "INSERT INTO noticia(titulo, texto, descripcion, categoria) VALUES (?,?,?,?)";
+            $query = $this->cnx->prepare($sql);
+            $arrData = array($titulo,$texto,$descripcion,$categoria);
+            $insert = $query -> execute($arrData);
+            $id = $this->cnx->lastInsertId();
+            echo "successNews".$id;
+        }catch (PDOException $th) {
+            echo "errorNews";
+        }
     }
 
-    //  ------------------INSERTAR NOTICIA ------------------
-
-    //  ------------------INSERTAR LIBRO ------------------
+    //  ------------------INSERTAR DOCUMENTO ------------------
     function createDocuments($nombre,$descripcion,$archivo,$privacidad){
-        $sql = "INSERT INTO documento(nombre, descripcion, archivo, privacidad) VALUES (?,?,?,?)";
-        $query = $this->cnx->prepare($sql);
-        $arrData = array($nombre,$descripcion,$archivo,$privacidad);
-        $insert = $query -> execute($arrData);
-        $this -> helper->validateInsert($insert,"El documento se ha agregado", "../main.php?p=documentos");
+        try {
+            $sql = "INSERT INTO documento(nombre, descripcion, archivo, privacidad) VALUES (?,?,?,?)";
+            $query = $this->cnx->prepare($sql);
+            $arrData = array($nombre,$descripcion,$archivo,$privacidad);
+            $insert = $query -> execute($arrData);
+            echo "successDoc";
+        }catch (PDOException $th) {
+            echo "errorDoc";
+        }
     }
-    //  ------------------INSERTAR LIBRO ------------------
 
     //  ------------------INSERTAR EN EL DIRECTORIO ------------------
     function createDirectory($nombre,$url,$estado,$carrera,$email,$telefono){
-        $sql = "INSERT INTO directorio(nombre, url, estado, carrera,email,telefono) VALUES (?,?,?,?,?,?)";
-        $query = $this->cnx->prepare($sql);
-        $arrData = array($nombre,$url,$estado,$carrera,$email,$telefono);
-        $insert = $query -> execute($arrData);
-        $this -> helper->validateInsert($insert,"El registro se ha agregado", "../main.php?p=directorio");
+        try {
+            $sql = "INSERT INTO directorio(nombre, url, estado, carrera,email,telefono) VALUES (?,?,?,?,?,?)";
+            $query = $this->cnx->prepare($sql);
+            $arrData = array($nombre,$url,$estado,$carrera,$email,$telefono);
+            $insert = $query -> execute($arrData);
+            echo "successDir";
+        } catch (PDOException $th) {
+            echo "errorDir";
+        }
     }
-    //  ------------------INSERTAR EN EL DIRECTORIO ------------------
-
-
 
 
     //  ------------------SELECCIONAR IMAGEN PARA LA NOTICIA ------------------
     function readImages(){
-        $sql = "SELECT id_foto,nom_foto,archivo FROM galeria";
+        $sql = "SELECT id_foto,nom_foto,archivo FROM galeria WHERE id_noticia IS NULL";
         $query = $this->cnx->prepare($sql);
+        // $query->bindParam(1,NULL);
         if($query->execute()){
             return $query;
         }
     }
-
+        // ---------- RELACIONAR NOTICIA A UNA IMAGEN -------------------------
     function insertImagesNews($id_foto,$id_noticia){
-        $sql = "UPDATE galeria SET id_noticia = ? WHERE id_foto = ?";
-        $query = $this->cnx->prepare($sql);
-        $query->bindParam(1,$id_noticia);
-        $query->bindParam(2,$id_foto);
-        $insert = $query->execute();
-
-        $this -> helper->validateInsert($insert,"Se ha agregado imagen a la noticia", "../main.php?p=noticias");
+        try {
+            $sql = "UPDATE galeria SET id_noticia = ? WHERE id_foto = ?";
+            $query = $this->cnx->prepare($sql);
+            $query->bindParam(1,$id_noticia);
+            $query->bindParam(2,$id_foto);
+            $insert = $query->execute();
+            echo "successImageNews";
+        }  catch (PDOException $th) {
+            echo "insertError";
+        }
     }
-    //  ------------------SELECCIONAR IMAGEN PARA LA NOTICIA ------------------
 
     //  ------------------OBTENER CATEGORIA PARA MOSTRAR EN INPUT SELECT ------------------
     function readCategory(){
@@ -103,7 +115,6 @@ class Create{
             return $query;
         }
     }
-    //  ------------------OBTENER CATEGORIA PARA MOSTRAR EN INPUT SELECT ------------------
 
     //  ------------------OBTENER TITULO DE NOTICIA ------------------
     function readTitleNews($id_noticia){
@@ -114,5 +125,4 @@ class Create{
             return $query;
         }
     }
-    // ------------------OBTENER TITULO DE NOTICIA ------------------
 }

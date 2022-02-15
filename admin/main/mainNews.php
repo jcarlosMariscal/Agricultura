@@ -13,7 +13,7 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Titulo</th>
+          <th scope="col" style="width:400px">Titulo</th>
           <th scope="col">Archivo(s)</th>
           <th scope="col">Categoria</th>
           <th scope="col">Fecha</th>
@@ -39,7 +39,7 @@
                           $image = $query->getImage($data['id_noticia']);
                           if($image){
                             foreach($image as $img){
-                              ?><a target="_blank" href="../<?php echo $img['archivo']; ?>">Ver Imagen</a> <br><?php
+                              ?><a target="_blank" href="../<?php echo $img['archivo']; ?>" style="color:#47874a">Ver Imagen</a> <br><?php
                             }
                           }
                         }
@@ -57,8 +57,7 @@
                     <td><?php echo $data["fecha"]; ?></td>
                     <td><a class="boton3 btn" href='update/updateNews.php?id_noticia=<?php echo $data['id_noticia']?>"'><i class="bi bi-pencil-square"></i>Editar</a></td>
                     <td><a class="boton3 btn" href='delete/receivedData.php?id_noticia=<?php echo $data['id_noticia']?>&&table=noticia'><i class="bi bi-trash"></i>Eliminar</a></td>
-                    <td><a class="boton3 btn" href='#'><i class="bi bi-card-image"></i>Add</a></td>
-                    <td><a class="boton3 btn" href='#'><i class="bi bi-card-image"></i>Del</a></td>
+                    <td><a class="boton3 btn" href='update/modImageNews.php?id_noticia=<?php echo $data['id_noticia']?>"'><i class="bi bi-card-image"></i>Image</a></td>
                   </tr>
                 <?php
               }

@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../css/admin.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 <body>
@@ -31,32 +32,38 @@
         <div class="container">
             <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Agregar Imagen </h1>
 
-            <form method="POST" action="receivedData.php" enctype="multipart/form-data" class ="form">
-                <input type="hidden" name="table" value="galeria">
+            <form id="formNoEditor" enctype="multipart/form-data" class ="form">
+                <div>
+                    <input type="hidden" name="table" value="galeria">
+                </div>
                 <div class="card card-container">
-                        <div class="center-input input-group">
+                        <div class="center-input input-group" id="group-nom_foto">
                             <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE DE FOTO:</span>
-                            <input id="text" type="text" name="nom_foto"  class="form-control"  required placeholder="Ingresar nombre."  aria-label="Username" aria-describedby="basic-addon1">
-                            <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
-                            <span class="msj"></span>
+                            <input type="text" name="nom_foto" id="nom_foto" class="form-control" placeholder="Ingresar nombre."  aria-label="Username" aria-describedby="basic-addon1">
+                            <p class="formInputError">El nombre debe tener un mínimo de 5 caracteres y no debe exceder de 60. Se permiten caracteres especiales como #, @, $, %, &, (, ).</p>
                         </div>
                 </div>
                 <div class="card card-container">
-                    <div class="center-input input-group">
+                    <div class="center-input input-group" id="group-descripcion">
                         <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
-                        <input id="text" type="text" name="descripcion" class="form-control" required placeholder="Ingresar departamento." aria-label="Username" aria-describedby="basic-addon1">
-                        <span class="icon-left"><i class="zmdi zmdi-check"></i></span>
-                        <span class="msj"></span>
+                        <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Ingresar una descripción" aria-label="Username" aria-describedby="basic-addon1">
+                        <p class="formInputError">La descripción debe tener un mínimo de 5 caracteres y no debe exceder de 255. Se permiten caracteres especiales como #, @, $, %, &, (, ).</p>
                     </div>
                 </div>
                 <div class="card card-container">
-                    <div class="center-input input-group">
+                    <div class="center-input input-group" id="group-archivo">
                         <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
-                        <input id="text" type="file" name="archivo" class="" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="archivo-class">
+                            <input type="file" name="archivo" id="archivo" aria-label="Username" aria-describedby="basic-addon1" accept="image/png, .jpeg, .jpg, image/gif">
+                        </div>
+                        <p class="formInputError" id="inputFile">Seleccione una imagen</p>
                     </div>
                 </div>
+                <div class="formGrupo formMensaje" id="formulario-mensaje">
+                    <p><i class="fas fa-exclamation-triangle"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
+                </div>
                 <div class="form-signin btn-form">
-                    <button class="btn" type="submit">Ingresar</button>
+                    <button class="btn" type="submit" id="button">Ingresar</button>
                 </div>
             </form>
     </div>
@@ -66,5 +73,7 @@
         <img class="img-abajo img-fluid" src="../../img/comite.png" width="200px" alt="">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </footer><div class="barra-abajo">
+    <script src="../../js/validate.js" type="module"></script>
 </body>
+</html>
 

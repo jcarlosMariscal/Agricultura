@@ -36,3 +36,22 @@
 
 include "../includes/footerAdmin.php"
 ?>
+<script>
+    let msj = localStorage.getItem("msj");
+    // console.log(msj);
+    if(msj === "true"){
+        Swal.fire({
+            title: "Bievenido <?php echo $_SESSION["admin"]["nombre"]; ?>!",
+            text: "Esta es la interfaz principal, seleccione una opción",
+            icon: "success",//error, 
+            timer: 3000,
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            confirmButtonColor: '#47874a',
+        });
+    } 
+    setTimeout(function(){
+        localStorage.removeItem("msj");
+    }, 2000);
+</script>

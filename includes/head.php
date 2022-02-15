@@ -26,5 +26,7 @@
     background: #6AA803;
     }
     </style>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="js/sweetAlert.js"></script> -->
 </head>
 <body class="bc">
