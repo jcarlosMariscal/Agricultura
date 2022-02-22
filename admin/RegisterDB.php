@@ -1,14 +1,12 @@
 <?php
 // <!-- ESTA CLASE TIENE MÉTODOS PARA EL REGISTRO Y LOGIN DEL USUARIO. -->
 session_start();
-include "../config/Connection.php";
-include "../helper/Helper.php";
+include "config/Connection.php";
 class RegisterDB{
     public $cnx;
     public $helper;
     function __construct(){ 
         $this -> cnx = Connection::connectDB(); // Guarda la conexión en una variable para después usarla.
-        $this -> helper = new Helper(); // Crea una instancia de la clase auxiliar.
     }
 
     // VERIFICA SI EXISTE UN ADMINISTRADOR
@@ -49,14 +47,6 @@ class RegisterDB{
                 }
             }
         }  
-    }
-
-    function getAdmin(){
-        $sql = "SELECT nombre FROM administrador";
-        $query = $this->cnx->prepare($sql);
-        if($query->execute()){
-            return $query;
-        } 
     }
 }
 ?>

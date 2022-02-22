@@ -1,11 +1,11 @@
-<!-- ARCHIVO PRINCIPAL DEL ADMINISTRADOR, SE CARGAN LOS COMPONENTES NECESARIOS Y DE ACUERDO A LA OPCIÓN QUE SE SELECCIONE SE VA LLAMANDO EL ARCHIVO CON EL CONTENIDO DE UNA SECCIÓN -->
 <?php 
+// <!-- ARCHIVO PRINCIPAL DEL ADMINISTRADOR, SE CARGAN LOS COMPONENTES NECESARIOS Y DE ACUERDO A LA OPCIÓN QUE SE SELECCIONE SE VA LLAMANDO EL ARCHIVO CON EL CONTENIDO DE UNA SECCIÓN -->
     session_start();
     if (!isset($_SESSION["admin"])){
         header("Location: ../admin.php");
     }
 
-    include('../includes/headerAdmin.php');
+    include('template/header.php');
     ?>
 <?php
     if(isset($_GET['p'])) {
@@ -15,26 +15,26 @@
     }
     switch ($page) {
         case 'galeria':
-            include "main/mainGalery.php";
+            include "CRUD/read/mainGalery.php";
             break;
         case 'documentos':
-            include "main/mainDocuments.php";
+            include "CRUD/read/mainDocuments.php";
             break;
         case "noticias":
-            include "main/mainNews.php";
+            include "CRUD/read/mainNews.php";
             break;
         case "categoria":
-            include "main/mainCategory.php";
+            include "CRUD/read/mainCategory.php";
             break;
         case "directorio":
-            include "main/mainDirectory.php";
+            include "CRUD/read/mainDirectory.php";
             break;
         default:
-            include "main/mainGalery.php";
+            include "CRUD/read/mainGalery.php";
             break;
     }
 
-include "../includes/footerAdmin.php"
+include "template/footer.php"
 ?>
 <script>
     let msj = localStorage.getItem("msj");

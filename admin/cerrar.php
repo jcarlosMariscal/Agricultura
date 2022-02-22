@@ -1,9 +1,6 @@
-<!-- ARCHIVO QUE CIERRA LA SESIÓN DEL ADMINISTRADOR -->
-
 <?php
+// <!-- ARCHIVO QUE CIERRA LA SESIÓN DEL ADMINISTRADOR -->
 session_start();
 session_destroy();
-header("location: ../admin.php");
-?>
-<?php
+header("location: index.php");
 ?>

@@ -1,6 +1,6 @@
 <!-- ESTA CLASE INCLUYE EL ARCHIVO DE CONEXIÓN Y LA CLASE CON FUNCIONES AUXILIARES. ESTE ARCHIVO LEE LA BASE DE DATOS CON FUNCIONES PARA MOSTRAR LOS REGISTROS EN CADA SECCIÓN  -->
 <?php
-include "config/Connection.php";
+include "admin/config/Connection.php";
 include "helper/Helper.php";
 class Read{
     public $cnx;

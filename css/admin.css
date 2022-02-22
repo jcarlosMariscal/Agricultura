@@ -55,10 +55,6 @@ h5{
   margin: 10px auto 10px;
   display: block;
 }
-
-.barra-abajo{
-  margin-top: 12vh;
-}
 /* -------------------- IMAGEN FOOTER  ----------------------- */
 
 
@@ -73,7 +69,7 @@ width: 120px;
 border-radius: 10px;
 background-color: #47874a;
 color: #f4f4f4;
-display: block;
+/* display: block; */
 }
 /* -------------------- BOTONES TABLA DE REGISTROS----------------------- */
 
@@ -86,7 +82,6 @@ display: block;
     text-align: center;
   }
 }
-
 
 
 
@@ -164,8 +159,6 @@ input{
   height: auto;
   padding-left: 10px;
   width: 100%;
-  /* line-height: 30px; */
-  /* margin: 20px auto; */
 }
 .formMensaje{
   height: 45px;
@@ -194,35 +187,26 @@ input{
   color: #47874a;
   font-weight: bold;
 }
-
 .disabled-button{
     cursor: not-allowed;
     background-color: rgb(130, 130, 130) !important;
     pointer-events:none;
 }
-
 .archivo-class{
   padding-left: 10px;
 }
-
-/* PARA AGREGAR NOTICIAS Quill.js */
-.editor{
+.editor{ /* PARA AGREGAR NOTICIAS Quill.js */
   width: 100%;
 }
-/* PARA AGREGAR NOTICIAS Quill.js */
 /* -------------------- VALIDAR FORMULARIOS -------------------------------*/
 
 /* -------------------------------- GALERIA SELECCIÓN IMAGENES PARA NOTICIA ---------------------------------------- */
 .cuadro{
-  /* background-color: #F66060; */
-  /* margin: 20px auto; */
   width: 1000px;
-  /* left: 500px; */
 }
 .gal{
   padding: 10px;
   background: #ccc;
-  /* width: 100px; */
 }
 div.image {
   margin: 5px;
@@ -251,7 +235,23 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked + .check {
   color: #2596be;
   font-weight: bold;
-  /* background-color: #47874a; */
 }
 /* ----- CHECKBOX PERSONALISADO -----------------------*/
 /* -------------------------------- GALERIA SELECCIÓN IMAGENES PARA NOTICIA ---------------------------------------- */
+
+/* ------------------COLOR BOTONES TABLA ----------------*/
+.delete{
+  background-color: #D13513;
+}
+.delete:hover{
+  background-color: #97250B;
+  color: #fff;
+}
+.update{
+  background-color: #1644A0;
+}
+.update:hover{
+  background-color: #0F3786;
+  color: #fff;
+}
+/* ------------------COLOR BOTONES TABLA ----------------*/
