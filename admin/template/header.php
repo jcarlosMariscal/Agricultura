@@ -24,23 +24,23 @@
         <br>
         <div class="usuario-modificar btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="First group">
-                <a href="main.php?p=galeria" class="btn-inicio btn"><i class="bi bi-card-image"></i>Galeria</a>
+                <a href="main.php?p=galeria" class="btn-inicio btn"><i class="bi bi-images"></i>Galeria</a>
                 <!-- <button type="button" class="btn-inicio btn"><i class="bi bi-card-image"></i>Galeria</button> -->
             </div>
             <div class="btn-group me-2" role="group" aria-label="Second group">
-                <a href="main.php?p=documentos" class="btn-inicio btn"><i class="bi bi-file-earmark"></i>Documentos</a>
+                <a href="main.php?p=documentos" class="btn-inicio btn"><i class="bi bi-file-earmark-bar-graph"></i>Documentos</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
                 <a href="main.php?p=noticias" class="btn-inicio btn"><i class="bi bi-newspaper"></i>Noticias</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="main.php?p=categoria" class="btn-inicio btn"><i class="bi bi-newspaper"></i>Categoria</a>
+                <a href="main.php?p=categoria" class="btn-inicio btn"><i class="bi bi-bookmark-check"></i>Categoria</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="main.php?p=directorio" class="btn-inicio btn"><i class="bi bi-folder-symlink"></i>Directorio</a>
+                <a href="main.php?p=directorio" class="btn-inicio btn"><i class="bi bi-folder-plus"></i>Directorio</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="cerrar.php" class="btn-inicio btn">Cerrar sesión</a>
+                <a href="cerrar.php" class="btn-inicio btn"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>
             </div>
         </div>
 

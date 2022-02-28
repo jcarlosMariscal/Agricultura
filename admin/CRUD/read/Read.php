@@ -1,5 +1,10 @@
 <!-- CLASE CON FUNCIONES PARA LEER REGISTROS PARA EL ADMINISTRADOR -->
 <?php
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/Read.php"){
+    header("Location: ../../main.php");
+}
 include "config/Connection.php";
 class Read{
     public $cnx;

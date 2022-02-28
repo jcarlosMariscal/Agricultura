@@ -40,12 +40,32 @@ class Helper{
             return $query;
         }
     }
-    function readPrivacityForm($cnx){
-        $sql = "SELECT privacidad FROM documento";
+    function readCategoryID($cnx, $id){
+        $sql = "SELECT C.id_categoria,C.categoria FROM noticia N INNER JOIN categoria C ON C.id_categoria = N.categoria WHERE N.id_noticia = ?";
         $query = $cnx->prepare($sql);
+        $query->bindParam(1,$id);
         if($query->execute()){
             return $query;
         }
+    }
+    function readPrivacityForm($cnx,$id){
+        $sql = "SELECT privacidad FROM documento WHERE id_documento = ?";
+        $query = $cnx->prepare($sql);
+        $query->bindParam(1, $id);
+        if($query->execute()){
+            return $query;
+        }
+    }
+    // Validar si el registro existe antes de mostrar formulario de modificación
+    function idUpdate($cnx,$table,$field,$id){
+        $sql = "SELECT $field FROM $table WHERE $field = ?";
+        $query = $cnx->prepare($sql);
+        $query -> bindParam(1,$id);
+        $query->execute();
+        if($query->rowCount() === 0){
+            return false;
+        }
+        return true;
     }
 }
 ?>

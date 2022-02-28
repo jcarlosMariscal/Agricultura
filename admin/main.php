@@ -2,7 +2,7 @@
 // <!-- ARCHIVO PRINCIPAL DEL ADMINISTRADOR, SE CARGAN LOS COMPONENTES NECESARIOS Y DE ACUERDO A LA OPCIÓN QUE SE SELECCIONE SE VA LLAMANDO EL ARCHIVO CON EL CONTENIDO DE UNA SECCIÓN -->
     session_start();
     if (!isset($_SESSION["admin"])){
-        header("Location: ../admin.php");
+        header("Location: index.php");
     }
 
     include('template/header.php');

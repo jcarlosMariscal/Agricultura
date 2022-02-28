@@ -1,9 +1,18 @@
 <?php 
+    session_start();
+    if (!isset($_SESSION["admin"])){
+        header("Location: ../../index.php");
+    }else if(!isset($_GET['id_foto'])){
+        header("Location: ../../main.php");
+    }
 require "Update.php";
 $query = new Update();
 
 $id = $_GET['id_foto'];
-// echo $_POST['id_foto'];
+$idUpdate = $query->idUpdate("galeria","id_foto",$id);
+if(!$idUpdate){
+    header("Location: ../../main.php");
+}
 $galery = $query -> readTable("galeria","id_foto",$id);
 if($galery){
     foreach($galery as $data){
@@ -12,11 +21,10 @@ if($galery){
         $descripcion = $data['descripcion'];
     }
 }
-$fecha_modi = strftime( "%Y-%m-%d %H-%M-%S");
 include "../../template/headerForm.php";
 ?>
         <div class="container">
-            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Actualizar Imagen </h1>
+            <h1 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1">Actualizar imagen en la galeria </h1>
             <form id="formNoEditor" enctype="multipart/form-data" class ="form">
                 <div>
                     <input type="hidden" name="table" value="galeria">
@@ -28,6 +36,7 @@ include "../../template/headerForm.php";
                         <div class="center-input input-group" id="group-nom_foto">
                             <span class="categoria-color input-group-text" id="basic-addon1">NOMBRE DE FOTO:</span>
                             <input type="text" name="nom_foto" id="nom_foto" class="form-control" value="<?php echo $nom_foto?>"  aria-label="Username" aria-describedby="basic-addon1">
+                            <i class="input-icon bi"></i>
                             <p class="formInputError">El nombre debe tener un mínimo de 5 caracteres y no debe exceder de 60. Se permiten caracteres especiales como #, @, $, %, &, (, ).</p>
                         </div>
                 </div>
@@ -35,15 +44,10 @@ include "../../template/headerForm.php";
                     <div class="center-input input-group" id="group-descripcion">
                         <span class="categoria-color input-group-text" id="basic-addon1">DESCRIPCION:</span>
                         <input type="text" name="descripcion" id="descripcion" class="form-control" value="<?php echo $descripcion?>" aria-label="Username" aria-describedby="basic-addon1">
+                        <i class="input-icon bi"></i>
                         <p class="formInputError">La descripción debe tener un mínimo de 5 caracteres y no debe exceder de 255. Se permiten caracteres especiales como #, @, $, %, &, (, ).</p>
                     </div>
                 </div>
-                <!-- <div class="card card-container"> -->
-                    <!-- <div class="center-input input-group"> -->
-                        <!-- <span class="categoria-color input-group-text" id="basic-addon1">FECHA MODIFICACIÓN:</span> -->
-                        <input type="hidden" name="fecha_modi" id="fecha_modi" value="<?php echo $fecha_modi; ?>" class="form-control" required aria-label="Username" aria-describedby="basic-addon1">
-                    <!-- </div> -->
-                <!-- </div> -->
                 <div class="card card-container">
                     <div class="center-input input-group" id="group-archivo">
                         <span class="categoria-color input-group-text" id="basic-addon1">ARCHIVO:</span>
@@ -55,7 +59,7 @@ include "../../template/headerForm.php";
                     </div>
                 </div>
                 <div class="formGrupo formMensaje" id="formulario-mensaje">
-                    <p><i class="fas fa-exclamation-triangle"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
+                    <p><i class="bi bi-exclamation-triangle-fill"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
                 </div>
                 <div class="form-signin btn-form">
                     <button class="btn" type="submit" id="button">Actualizar</button>

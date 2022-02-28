@@ -9,7 +9,8 @@ const expresiones = { // REGEX, SE MANDA A LLAMAR DE ACUERDO AL CAMPO A VALIDAR
     nombre100: /^\¿?\¡?[\wÀ-ÿ\s(\#\@\$\%\&\(\))\.\,]{5,100}\??\!?$/,
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     telefono: /^\d{7,14}$/,
-    url: /^https?:\/\/[\w\-]+(\.[\w\-]+)+[\#?]?.*$/    
+    url: /^https?:\/\/[\w\-]+(\.[\w\-]+)+[\#?]?.*$/,
+    texto: /^\S+.{20,}$/   
 }
 const campos = { // OBJETO QUE GUARDA EL ESTADO DE LOS CAMPOS, SE MANDA A LLAMAR PARA ACTUALIZARLO DE ACUERDO A LA VALIDACIÓN.
     nombre: false,
@@ -21,7 +22,8 @@ const campos = { // OBJETO QUE GUARDA EL ESTADO DE LOS CAMPOS, SE MANDA A LLAMAR
     categoria: false,
     email: false,
     telefono: false,
-    url: false
+    url: false,
+    texto: false
 }
 
 const validarInputFile = (input) => { // MÉTODO QUE VALIDA UN INPUT FILE
@@ -33,7 +35,7 @@ const validarInputFile = (input) => { // MÉTODO QUE VALIDA UN INPUT FILE
     var exten = (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : undefined;
     var extensiones = [];
     if(input.accept === "image/png, .jpeg, .jpg, image/gif"){
-        extensiones = ["png","PNG","jpeg","jpg","gif"]; // ESTABLECER IMÁGENES ADMITIDOS
+        extensiones = ["png","PNG","jpeg","jpg"]; // ESTABLECER IMÁGENES ADMITIDOS
     }else if(input.accept === ".pdf"){
         extensiones= ["pdf"];
     }
@@ -47,7 +49,9 @@ const validarInputFile = (input) => { // MÉTODO QUE VALIDA UN INPUT FILE
     }else{ // LA VALIDACIÓN ES INCORRECTA
         document.getElementById(`group-archivo`).classList.remove("form-success-file");
         document.querySelector(`#group-archivo .formInputError`).classList.add("formInputError-active");
-        document.getElementById('inputFile').innerHTML = "La extension " + exten + " no está permitido. Seleccione una imagen.";
+        console.log(exten);
+        let msj = `La extension ${exten} no está permitido. Por favor seleccione ${(exten === "pdf") ? "una imagen" : "un documento"} para un registro correcto.`;
+        document.getElementById('inputFile').innerHTML = msj;
         boton.classList.add("disabled-button");
         campos['archivo'] = false;
     }
@@ -58,18 +62,43 @@ const validarCampo = (expresion, input, campo) => { // MÉTODO PARA VALIDAR INPU
         document.getElementById(`group-${campo}`).classList.remove("form-incorrecto");
         document.getElementById(`group-${campo}`).classList.add("form-success");
         document.querySelector(`#group-${campo} .formInputError`).classList.remove("formInputError-active");
+        document.querySelector(`#group-${campo} .input-icon`).classList.add("bi-check-circle-fill");
+        document.querySelector(`#group-${campo} .input-icon`).classList.remove("bi-x-circle-fill");
+        document.querySelector(`#group-${campo} .input-icon`).classList.add("inic-correct");
+        document.querySelector(`#group-${campo} .input-icon`).classList.remove("inic-err");
         boton.classList.remove("disabled-button");
         campos[campo] = true; // CAMBIAMOS EL VALOR DEL CAMPO A TRUE
     }else{ // SI LA VALIDACIÓN ES INCORRECTA
         document.getElementById(`group-${campo}`).classList.add("form-incorrecto");
         document.getElementById(`group-${campo}`).classList.remove("form-success");
         document.querySelector(`#group-${campo} .formInputError`).classList.add("formInputError-active");
+        document.querySelector(`#group-${campo} .input-icon`).classList.remove("bi-check-circle-fill");
+        document.querySelector(`#group-${campo} .input-icon`).classList.add("bi-x-circle-fill");
+        document.querySelector(`#group-${campo} .input-icon`).classList.remove("inic-correct");
+        document.querySelector(`#group-${campo} .input-icon`).classList.add("inic-err");
         boton.classList.add("disabled-button");
         campos[campo] = false; // CAMBIAMOS EL VALOR DEL CAMPO A FALSE
     }
 }
 
+const validarEditor = (txtDiv) => {
+    if(expresiones.texto.test(txtDiv.textContent)){
+        document.getElementById('editor').classList.remove("editor-incorrecto");
+        document.getElementById('editor').classList.add("editor-success");
+        document.querySelector(`#group-text .formInputError`).classList.remove("formInputError-active");
+        boton.classList.remove("disabled-button");
+        campos['texto'] = true;
+    }else{
+        document.getElementById('editor').classList.add("editor-incorrecto");
+        document.getElementById('editor').classList.remove("editor-success");
+        document.querySelector(`#group-text .formInputError`).classList.add("formInputError-active");
+        boton.classList.add("disabled-button");
+        campos['texto'] = false;
+    }
+}
+
 const validarForm = (e) => {
+    // console.log(e);
     switch (e.target.name){
         case "archivo": // VALIDAR INPUT FILE
             validarInputFile(e.target);
@@ -114,5 +143,6 @@ const validarForm = (e) => {
 }
 export{
     campos,
-    validarForm
+    validarForm,
+    validarEditor
 }

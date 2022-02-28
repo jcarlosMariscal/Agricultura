@@ -1,13 +1,15 @@
 // ------------------- FORMULARIO PARA ACTUALIZAR REGISTRO ------------------
 import { alert,confirmQuestion } from "./helper/sweetAlert.js"; // Alertas
 import { toolbarOptions } from "./helper/optionsEditor.js"; // Configuración del editor
-import { validarForm,campos } from "./helper/regex.js"; // Validaciones.
+import { validarForm,campos,validarEditor } from "./helper/regex.js"; // Validaciones.
 
 let data = [];
 const admin = document.getElementById("admin"), 
     noEditor = document.getElementById("formNoEditor"), 
     withEditor = document.getElementById("formWithEditor"), // Formularios con editor
     atras = document.getElementById("atras"); // Botón atrás de los formularios
+const titleForm = document.getElementById("basic-addon1");
+const txtDiv = document.getElementById("editor");
 
 if(admin){
     var formulario = admin, inputs = document.querySelectorAll('#admin input'); // Obtener todos los inputs.
@@ -22,11 +24,21 @@ if(admin){
     });
     var formulario = withEditor, inputs = document.querySelectorAll('#formWithEditor input');
 }
-
-inputs.forEach((input) => { // Hacer validaciones 
-    input.addEventListener('keyup', validarForm); // Soltar una tecla
-    input.addEventListener('blur', validarForm); // Salir del input
+window.addEventListener("DOMContentLoaded", () => {
+    if(txtDiv) validarEditor(txtDiv);
+    if(inputs){
+        inputs.forEach((input) => {
+            input.addEventListener('mousemove', validarForm);
+        });
+    }
 });
+if(inputs){
+    inputs.forEach((input) => { // Hacer validaciones 
+        input.addEventListener('keyup', validarForm); // Soltar una tecla
+        input.addEventListener('blur', validarForm); // Salir del input
+        input.addEventListener('input', validarForm); //
+    });
+}
 
 const send = (route,form,checkbox,action)=>{ // MANDAR DATOS A PHP
     fetch(route,{
@@ -43,6 +55,10 @@ if(noEditor){
         let form = new FormData(formulario);
         // Validar si se recibe algo del input file
         (form.get("archivo"))? ((form.get("archivo").length === undefined) ? campos.archivo=true:campos.archivo= false) : "";
+        if(!titleForm.textContent.includes(form.get("table"))){
+            location.reload();
+            return;
+        }
         // Se usa el input que se colocó en el formulario como identificador
         if(form.get("table") === "galeria"){
             data = [campos.nom_foto,campos.descripcion,campos.archivo,true,true,true];
@@ -72,27 +88,33 @@ if(noEditor){
                 let msgNews = `Ahora esta noticia tendrá ${(checkbox.length === 1)? `1 imágen` : `${checkbox.length} imágenes`} , ¿Quiere continuar con la eliminación?`;  
                 confirmQuestion("../../main.php?p=noticias", "Guardar cambios", `${msgNews}`, form); // ALERTA CONFIRMACIÓN DE CAMBIOS
             }
+            return;
+        }
+        let result = data.filter(f => f === false); // Filtrar si hay un campo en false en el arreglo, si hay 0 ejecutamos lo siguiente
+        if(result.length === 0){ // VALIDAR QUE TODOS LOS DATOS DEL ARREGLO SON VERDADEROS
+            if(form.get("table") !== "imageNews"){
+                document.getElementById('formulario-mensaje').classList.remove('formMensaje-active');
+            };
+            send("receivedData.php",form,0,"mod"); // Llamamos la función para mandar los datos
         }else{
-            let result = data.filter(f => f === false); // Filtrar si hay un campo en false en el arreglo, si hay 0 ejecutamos lo siguiente
-            if(result.length === 0){ // VALIDAR QUE TODOS LOS DATOS DEL ARREGLO SON VERDADEROS
-                if(form.get("table") !== "imageNews"){
-                    document.getElementById('formulario-mensaje').classList.remove('formMensaje-active');
-                };
-                send("receivedData.php",form,0,"mod"); // Llamamos la función para mandar los datos
-            }else{
-                if(form.get("table") === "imageNews") return;
-                document.getElementById('formulario-mensaje').classList.add('formMensaje-active');
-            }
+            if(form.get("table") === "imageNews") return;
+            document.getElementById('formulario-mensaje').classList.add('formMensaje-active');
         }
     });
 }else if(withEditor){ 
+    txtDiv.addEventListener("keyup", () => {
+        validarEditor(txtDiv);
+    });
     formulario.addEventListener('submit',(e) => {
         e.preventDefault();
         document.getElementById("texto").value = quill.container.firstChild.innerHTML; // MANDAMOS EL TEXTO DEL editor AL INPUT
         let form = new FormData(formulario);
-        let cuerpo = true;
+        if(!titleForm.textContent.includes(form.get("table"))){
+            location.reload();
+            return;
+        }
         if(form.get("table") == "noticia"){
-            data = [campos.titulo,campos.descripcion,cuerpo];
+            data = [campos.titulo,campos.descripcion,campos.texto];
         }
         form.get("table");
         let result = data.filter(f => f === false);

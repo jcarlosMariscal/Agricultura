@@ -22,15 +22,15 @@
         </div>
         <hr size="10" style="background: green;">
     </div>
-    <!-- <h1 class="welcome text-center">Bienvenido</h1>
-        <h5>Hola <?php echo $_SESSION['admin']['nombre']; ?>, seleccione la opción a modificar</h5> -->
-        <br>
         <div class="usuario-modificar btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="First group">
-                <a id="atras" class="btn-inicio btn"><i class="bi bi-card-image"></i>Atrás</a>
+                <a href="../../main.php" class="btn-inicio btn"><i class="bi bi-house"></i></i>Inicio</a>
+            </div>
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <a id="atras" class="btn-inicio btn"><i class="bi bi-arrow-bar-left"></i>Atrás</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="../../cerrar.php" class="btn-inicio btn">Cerrar sesión</a>
+                <a href="../../cerrar.php" class="btn-inicio btn"><i class="bi bi-box-arrow-left"></i>Cerrar sesión</a>
             </div>
         </div>
 

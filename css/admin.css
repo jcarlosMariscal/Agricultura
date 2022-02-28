@@ -178,10 +178,10 @@ input{
 	display: block;
 }
 .form-incorrecto input{
-	border: 1px solid #F66060;
+	border: 3px solid #F66060;
 }
 .form-success input{
-	border: 1px solid #47874a;
+	border: 3px solid #47874a;
 }
 .form-success-file input[type="file"]{
   color: #47874a;
@@ -195,8 +195,43 @@ input{
 .archivo-class{
   padding-left: 10px;
 }
+
+ /* ----------- ICONO DE FORMULARIO */
+.input-icon {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	z-index: 100;
+	font-size: 20px;
+	opacity: 0;
+}
+.icon-admin{
+  right: 35px;
+	top: 10px;
+}
+.inic-correct{
+  opacity: 1;
+  color: #47874a;
+}
+.inic-err{
+  opacity: 1;
+  color: #F66060;
+}
+
+.select{
+  border: 3px solid #47874a;
+  /* height: 70px; */
+}
+
 .editor{ /* PARA AGREGAR NOTICIAS Quill.js */
   width: 100%;
+}
+/* .ql-snow */
+.editor-success{
+  background-color: rgba(71, 135, 74, .4);
+}
+.editor-incorrecto{
+  background-color: rgba(246, 96, 96, .4);
 }
 /* -------------------- VALIDAR FORMULARIOS -------------------------------*/
 
@@ -255,3 +290,12 @@ input[type="checkbox"]:checked + .check {
   color: #fff;
 }
 /* ------------------COLOR BOTONES TABLA ----------------*/
+
+.m{
+  margin-top: 25vh;
+}
+
+/* FORMATEAR LOGIN*/
+.sec-admin{
+  margin-bottom: 2px;
+}

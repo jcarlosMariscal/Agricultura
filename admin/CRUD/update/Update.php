@@ -1,4 +1,9 @@
 <?php
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/update/Update.php"){
+    header("Location: ../../main.php");
+}
 // <!-- CLASE PARA MODIFICAR REGISTROS, ACCEDE A LA CLASE AUXILIAR Y TIENE MÉTODOS QUE USARÁN PARA MODIFICAR REGISTROS DE ACUERDO A LA TABLA -->
 include "../../config/Connection.php";
 include "../../helper/Helper.php";
@@ -15,7 +20,21 @@ class Update{
     function getRoute($file,$route){ return $this->helper->generateRoute($file,$route); }
     function readTitleNews($id_noticia){ return $this->helper->readTitleNews($id_noticia,$this->cnx); }
     function readCategory(){ return $this->helper->readCategory($this->cnx); }
-    function readPrivacityForm(){ return $this->helper->readPrivacityForm($this->cnx); }
+    function readCategoryID($id){ return $this->helper->readCategoryID($this->cnx,$id); }
+    function readPrivacityForm($id){ return $this->helper->readPrivacityForm($this->cnx,$id); }
+    function idUpdate($table,$field,$id){ return $this->helper->idUpdate($this->cnx,$table,$field,$id); }
+        // ------------ VALIDAR SI UN REGISTRO YA EXISTE ANTES DE AGREGAR O ACTUALIZAR
+    function repeated($table,$field,$fieldID,$value,$valueID){
+        $sql = "SELECT $field FROM $table WHERE $field = ? AND $fieldID != ?";
+        $query = $this->cnx->prepare($sql);
+        $query->bindParam(1,$value);
+        $query->bindParam(2,$valueID);
+        $query->execute();
+        if($query->rowCount() === 0){
+            return false;
+        }
+        return true;
+    }
 
     // BUSCAR UN REGISTRO PARA MOSTRAR EN FORMULARIO,RECIBE LA TABLA A CONSULTAR, EL CAMPO (id_foto,...) A VALIDAR Y SU VALOR
     function readTable($table,$field,$id){

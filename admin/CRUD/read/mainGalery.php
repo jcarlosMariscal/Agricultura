@@ -1,5 +1,10 @@
 <!-- PÁGINA PRINCIPAL DEL ADMINISTRADOR PARA MOSTRAR GALERIA. OFRECE OPCIONES PARA AGREGAR, EDITAR Y ELIMINAR REGISTROS -->
 <?php
+  $host= $_SERVER["HTTP_HOST"];
+  $url= $_SERVER["REQUEST_URI"];
+  if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainGalery.php"){
+      header("Location: ../../index.php");
+  }
   require "Read.php";
   $query = new Read();
   $galery = $query->readGalery();
@@ -10,15 +15,15 @@
   <a class="mover-a" href="<?php echo $url; ?>" target="_blank">Viualizar</a>
   <br><br>
   <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">Archivo</th>
           <th scope="col">Descripción</th>
-          <th scope="col" >Fecha de publicación</th>
-          <th scope="col">Fecha de modificación</th>
+          <th scope="col">F. Publicación</th>
+          <th scope="col">F. Modificación</th>
           <!-- <th scope="col"></th> -->
           <th scope="col"><a class="boton3 btn" href="CRUD/create/createGalery.php"><i class="bi bi-plus-lg"></i>Agregar</a></th>
         </tr>
@@ -36,7 +41,7 @@
                     <td><?php echo $data["descripcion"];; ?></td>
                     <td><?php echo $data["fecha_publi"]; ?></td>
                     <td><?php echo $data["fecha_modi"]; ?></td>
-                    <td><a href="CRUD/update/updateGalery.php?id_foto=<?php echo $data['id_foto'];?>" class="update bi bi-pencil-square boton3 btn">Editar</a></td>
+                    <td><a href="CRUD/update/updateGalery.php?id_foto=<?php echo $data['id_foto'];?>" class="update bi bi-pencil-square boton3 btn"> Editar</a></td>
                     <td><a class="deleteGal delete bi bi-trash boton3 btn"> Eliminar</a></td>
                   </tr>
                 <?php

@@ -1,5 +1,10 @@
 <!-- PÁGINA PRINCIPAL DEL ADMINISTRADOR PARA MOSTRAR EL DIRECTORIO. OFRECE OPCIONES PARA AGREGAR, EDITAR Y ELIMINAR REGISTROS -->
 <?php
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainDirectory.php"){
+    header("Location: ../../main.php");
+}
   require "Read.php";
   $query = new Read();
   $directory = $query->readDirectory();
@@ -36,8 +41,8 @@
                     <td><?php echo $data["carrera"]; ?></td>
                     <td><?php echo $data["email"]; ?></td>
                     <td><?php echo $data["telefono"]; ?></td>
-                    <td><a href="CRUD/update/updateDirectory.php?id_directorio=<?php echo $data['id_directorio'];?>" class="update bi bi-pencil-square boton3 btn">Editar</a></td>
-                    <td><a class="deleteDir delete bi bi-trash boton3 btn"></i>Eliminar</a></a></td>
+                    <td><a href="CRUD/update/updateDirectory.php?id_directorio=<?php echo $data['id_directorio'];?>" class="update bi bi-pencil-square boton3 btn"> Editar</a></td>
+                    <td><a class="deleteDir delete bi bi-trash boton3 btn"></i> Eliminar</a></a></td>
                   </tr>
                 <?php
               }

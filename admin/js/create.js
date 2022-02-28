@@ -1,13 +1,14 @@
 // VALIDACIÓN DE FORMULARIOS PARA AGREGAR REGISTROS
 import { alert } from "./helper/sweetAlert.js"; // Aalertas
 import { toolbarOptions } from "./helper/optionsEditor.js"; // Configuración del editor
-import { validarForm,campos } from "./helper/regex.js"; // Validaciones.
+import { validarForm,campos,validarEditor } from "./helper/regex.js"; // Validaciones.
 
 let data = [];
 const admin = document.getElementById("admin"),
       noEditor = document.getElementById("formNoEditor"), // Formularios sin editor
       withEditor = document.getElementById("formWithEditor"), // Formularios con editor
       atras = document.getElementById("atras"); // Botoón atrás formularios
+const titleForm = document.getElementById("basic-addon1");
 
 if(admin){
     var formulario = admin, inputs = document.querySelectorAll('#admin input');
@@ -23,16 +24,20 @@ if(admin){
     });
     var formulario = withEditor, inputs = document.querySelectorAll('#formWithEditor input');
 }
-inputs.forEach((input) => { // VALIDAR CADA INPUT
-    input.addEventListener('keyup', validarForm); // Soltar una tecla
-    input.addEventListener('blur', validarForm); // Salir del input
-});
+if(inputs){
+    inputs.forEach((input) => { // VALIDAR CADA INPUT
+        input.addEventListener('keyup', validarForm); // Soltar una tecla
+        input.addEventListener('blur', validarForm); // Salir del input
+        input.addEventListener('input', validarForm); //
+    });
+}
 
 const send = (route,form,checkbox,action)=>{ // MANDAR DATOS A PHP
     fetch(route,{
         method: 'POST',
         body: form
     }).then( (res) => res.text()).then( (data) => {
+        console.log(data);
         if(data == "loginError"){ // DEPENDIENDO DEL RESULTADO MANDAR UNA ALERTA
             document.getElementById("error-datos").classList.add("formMensaje-active");
         }else if(data == "success"){
@@ -63,6 +68,10 @@ if(admin){
     formulario.addEventListener('submit', (e) => {
         e.preventDefault();
         let form = new FormData(formulario);
+        if(!titleForm.textContent.includes(form.get("table"))){
+            location.reload();
+            return;
+        }
         if(form.get("table") === "galeria"){
             data = [campos.nom_foto,campos.descripcion,campos.archivo,true,true,true];
         }else if(form.get("table") === "documento"){
@@ -84,27 +93,35 @@ if(admin){
                 form.append("id_foto[]", checkbox); // AÑADIR AL FORM EL ARREGLO DE checkboxs
                 send("receivedData.php",form,checkbox,"add");
             }
+            return;
+        }
+        let result = data.filter(f => f === false);
+        if(result.length === 0){ // VALIDAR QUE TODOS LOS DATOS DEL ARREGLO SON VERDADEROS
+            if(form.get("table") !== "imageNews"){
+                document.getElementById('formulario-mensaje').classList.remove('formMensaje-active');
+            };
+            send("receivedData.php",form,[],"add");
         }else{
-            let result = data.filter(f => f === false);
-            if(result.length === 0){ // VALIDAR QUE TODOS LOS DATOS DEL ARREGLO SON VERDADEROS
-                if(form.get("table") !== "imageNews"){
-                    document.getElementById('formulario-mensaje').classList.remove('formMensaje-active');
-                };
-                send("receivedData.php",form,[],"add");
-            }else{
-                if(form.get("table") === "imageNews") return;
-                document.getElementById('formulario-mensaje').classList.add('formMensaje-active');
-            }
+            if(form.get("table") === "imageNews") return;
+            document.getElementById('formulario-mensaje').classList.add('formMensaje-active');
         }
     });
 }else if(withEditor){ // FORMULARIO CON EDITOR
+    let txtDiv = document.getElementById("editor");
+    txtDiv.addEventListener("keyup", () => {
+        validarEditor(txtDiv);
+    });
     formulario.addEventListener('submit',(e) => {
         e.preventDefault();
-        document.getElementById("texto").value = quill.container.firstChild.innerHTML; // MANDAMOS EL TEXTO DEL editor AL INPUT
+        let txt = document.getElementById("texto");
+        txt.value = quill.container.firstChild.innerHTML; // MANDAMOS EL TEXTO DEL editor AL INPUT
         let form = new FormData(formulario);
-        let cuerpo = true;
+        if(!titleForm.textContent.includes(form.get("table"))){
+            location.reload();
+            return;
+        }
         if(form.get("table") == "noticia"){
-            data = [campos.titulo,campos.descripcion,cuerpo];
+            data = [campos.titulo,campos.descripcion,campos.texto];
         }
         let result = data.filter(f => f === false);
         if(result.length === 0){

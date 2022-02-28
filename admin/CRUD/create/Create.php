@@ -1,4 +1,9 @@
 <?php
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/create/create.php"){
+    header("Location: ../../main.php");
+}
 // <!-- CLASE CON MÉTODOS PARA CREAR REGISTROS -->
 include "../../config/Connection.php";
 include "../../helper/Helper.php";
@@ -14,6 +19,19 @@ class Create{
     function getRoute($file,$route){ return $this->helper->generateRoute($file,$route); }
     function readCategory(){ return $this->helper->readCategory($this->cnx); }
     function readTitleNews($id_noticia){ return $this->helper->readTitleNews($id_noticia,$this->cnx); }
+    function idUpdate($table,$field,$id){ return $this->helper->idUpdate($this->cnx,$table,$field,$id); }
+        // ------------ VALIDAR SI UN REGISTRO YA EXISTE ANTES DE AGREGAR O ACTUALIZAR
+    // ---------------------------- -----  --------------------
+    function repeated($table,$field,$value){
+        $sql = "SELECT $field FROM $table WHERE $field = ?";
+        $query = $this->cnx->prepare($sql);
+        $query->bindParam(1,$value);
+        $query->execute();
+        if($query->rowCount() === 0){
+            return false;
+        }
+        return true;
+    }
 
     //  ------------------INSERTAR IMAGEN A GALERIA ------------------
     function createGalery($nom_foto,$archivo,$descripcion){

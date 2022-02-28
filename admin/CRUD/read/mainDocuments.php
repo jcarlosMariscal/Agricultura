@@ -1,5 +1,10 @@
 <!-- PÁGINA PRINCIPAL DEL ADMINISTRADOR PARA MOSTRAR DOCUMENTOS. OFRECE OPCIONES PARA AGREGAR, EDITAR Y ELIMINAR REGISTROS -->
 <?php
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainDocuments.php"){
+    header("Location: ../../main.php");
+}
   require "Read.php";
   $query = new Read();
   $documents = $query->readDocuments();
@@ -10,7 +15,7 @@
   <a class="mover-a" href="<?php echo $url; ?>" target="_blank">Visualizar</a>
   <br><br>
   <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -44,8 +49,8 @@
                       ?>
                     </td>
                     <td><?php echo $data['fecha']; ?></td>
-                    <td><a href="CRUD/update/updateDocuments.php?id_documento=<?php echo $data['id_documento'];?>" class="update bi bi-pencil-square boton3 btn">Editar</a></td>
-                    <td><a class="deleteDoc delete bi bi-trash boton3 btn"></i>Eliminar</a></td>
+                    <td><a href="CRUD/update/updateDocuments.php?id_documento=<?php echo $data['id_documento'];?>" class="update bi bi-pencil-square boton3 btn"> Editar</a></td>
+                    <td><a class="deleteDoc delete bi bi-trash boton3 btn"></i> Eliminar</a></td>
                   </tr>
                 <?php
               }

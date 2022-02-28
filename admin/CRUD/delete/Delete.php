@@ -1,5 +1,10 @@
 <?php
 // <!-- CLASE CON FUNCIONES PARA ELIMINAR REGISTROS -->
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/delete/Delete.php"){
+    header("Location: ../../main.php");
+}
 include "../../config/Connection.php";
 class Delete{
     public $cnx;

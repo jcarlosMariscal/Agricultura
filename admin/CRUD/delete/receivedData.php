@@ -2,8 +2,8 @@
 // <!-- ARCHIVO QUE RECIBE LOS ID PARA ELIMINAR, RECIBE LA TABLA DESDE EL FORMULARIO, SE HACE UNA CONDICIÓN Y DE ACUERDO A ESO SE LLAMA A LA FUNCIÓN PARA ELIMINAR EL REGISTRO. -->
 require "Delete.php";
 $query = new Delete();
-$table = $_POST['table'];
-$id = $_POST['id'];
+$table = (isset($_POST['table']) ? $_POST['table'] : NULL);
+$id = (isset($_POST['id']) ? $_POST['id'] : NULL);
 switch ($table) {
     case 'galeria':
         $validate = $query->validate($table,$id);
@@ -36,6 +36,6 @@ switch ($table) {
         echo $res;
         break;
     default:
-        echo "Error al eliminar, no coicidencia";
+        header("Location: ../../main.php");
         break;
 }

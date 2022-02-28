@@ -29,31 +29,46 @@ if (isset($_SESSION["admin"])){
                 if($validate === 0){
                     ?><p class="text-center"><a href="registerForm.php" class="err-admin">Aún no existe un administrador en la base de datos, por favor agreguelo</a></p><?php
                 }else{
-                    ?><p class="text-center">Iniciar sesión</p><?php
+                    ?><p class="text-center">Inicie sesión</p><?php
                 }
                 // VALIDAR SI EXISTE UN ADMINISTRADOR
             ?>
             <hr size="4" style="color: #47874a;">
+            <noscript>
+                <p class="text-center">
+                    Javascript está deshabilitado en su navegador web.<br />
+                    Por favor, para que este sitio funcione,<br />
+                    <b><i>habilite javascript</i></b>.<br />
+                    <br/>
+                </p>
+            </noscript>
             <form class="form-signin" id="admin">
-                <div >
-                    <input type="text" name="table" value="login" hidden>
+                <div>
+                <input type="hidden" name="table" value="login">
                 </div>
-                <div id="group-nombre">
-                    <input type="text" name="nombre" id="nombre" class="login_box" placeholder="Ingrese su nombre">
-                    <p class="formInputError">El nombre no debe estar vacío, debe tener un mínimo de 3 y un máximo de 30 caracteres.</p>
+                <div class="card card-container sec-admin">
+                        <div class="center-input input-group" id="group-nombre">
+                            <!-- <span class="categoria-color input-group-text" id="basic-addon1">Nombre:</span> -->
+                            <input type="text" name="nombre" id="nombre" class="login_box" placeholder="Ingrese su nombre">
+                            <i class="input-icon icon-admin bi"></i>
+                            <p class="formInputError">El nombre no debe estar vacío, debe tener un mínimo de 3 y un máximo de 30 caracteres.</p>
+                        </div>
                 </div>
-                <div id="group-password">
-                    <input type="password" name="password" id="password" class="login_box" placeholder="Ingrese su contraseña">
-                    <p class="formInputError">La contraseña debe tener mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número</p>
+                <div class="card card-container sec-admin">
+                        <div class="center-input input-group" id="group-password">
+                            <!-- <span class="categoria-color input-group-text" id="basic-addon1">Nombre:</span> -->
+                            <input type="password" name="password" id="password" class="login_box" placeholder="Ingrese su contraseña">
+                            <i class="input-icon icon-admin bi"></i>
+                            <p class="formInputError">La contraseña debe tener mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número</p>
+                        </div>
                 </div>
-
-                <div class="formOneGrupo formMensaje" id="formulario-mensaje">
-                    <p><i class="fas fa-exclamation-triangle"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
+                <div class="formGrupo formMensaje" id="formulario-mensaje">
+                    <p><i class="bi bi-exclamation-triangle-fill"></i><b>Error: </b>Por favor rellena el formulario correctamente</p>
                 </div>
                 <div class="formOneGrupo formMensaje" id="error-datos">
-                    <p><b>Error: </b>No se pudo iniciar sesión, verifique que sus datos sean correctos.</p>
+                    <p><i class="bi bi-x-circle-fill"></i><b>Error: </b>No se pudo iniciar sesión, verifique que sus datos sean correctos.</p>
                 </div>
-                <button class="btn-admin" type="submit" id="button">Iniciar sesión</button>
+                    <button class="btn-admin" type="submit" id="button"><i class="bi bi-box-arrow-in-right"></i>Iniciar sesión</button>
             </form>
         </div>
     </div>

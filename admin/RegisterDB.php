@@ -1,5 +1,10 @@
 <?php
 // <!-- ESTA CLASE TIENE MÉTODOS PARA EL REGISTRO Y LOGIN DEL USUARIO. -->
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/RegisterDB.php"){
+    header("Location: index.php");
+}
 session_start();
 include "config/Connection.php";
 class RegisterDB{

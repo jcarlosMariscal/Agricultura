@@ -1,5 +1,10 @@
 <!-- PÁGINA PRINCIPAL DEL ADMINISTRADOR PARA MOSTRAR CATEGORIAS. OFRECE OPCIONES PARA AGREGAR, EDITAR Y ELIMINAR REGISTROS -->
 <?php
+$host= $_SERVER["HTTP_HOST"];
+$url= $_SERVER["REQUEST_URI"];
+if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainCategory.php"){
+    header("Location: ../../main.php");
+}
   require "Read.php";
   $query = new Read();
   $category = $query->readCategory();
@@ -27,8 +32,8 @@
                   <tr>
                     <td><?php echo $data["id_categoria"]; ?></td>
                     <td><?php echo $data["categoria"]; ?></td>
-                    <td><a href="CRUD/update/updateCategory.php?id_categoria=<?php echo $data['id_categoria'];?>" class="update bi bi-pencil-square boton3 btn">Editar</a></td>
-                    <td><a class="deleteCat delete bi bi-trash boton3 btn">Eliminar</a></td>
+                    <td><a href="CRUD/update/updateCategory.php?id_categoria=<?php echo $data['id_categoria'];?>" class="update bi bi-pencil-square boton3 btn"> Editar</a></td>
+                    <td><a class="deleteCat delete bi bi-trash boton3 btn"> Eliminar</a></td>
                   </tr>
                 <?php
               }

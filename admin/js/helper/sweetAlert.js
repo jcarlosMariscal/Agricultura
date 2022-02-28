@@ -6,10 +6,11 @@ function alertInsert(previous,title,text,icon) { // ALERTA AL INSERTAR UN REGIST
         icon,
         confirmButtonColor: '#47874a',
         confirmButtonText: "Aceptar",
-        allowOutsideClick: false
+        allowOutsideClick: false,
+        showCloseButton: true
     }).then((button)=>{
         if(button.isConfirmed === true){
-            location.href=`${previous}`;;
+            location.href=`${previous}`;
         }
     });
 }
@@ -141,11 +142,22 @@ function alert(data,checkbox,action){ // FUNCIÓN QUE LLAMA LAS ALERTAS DEPENDIE
         case "exists":
             alertInsert("index.php", "Error", "Ya existe un administrador en la Base de Datos", "error");
             break;
+        case "rExits":
+            alertInsert("#", "Datos repetidos", "Contenido de algún campo repetido, verifique la información que colocó, no es posible tener dos registros con la misma información", "error");
+            break;
         case "errorLogin":
             alertInsert("#", "Error", "No se pudo registrar al Administrador", "error");
             break;
         case "successLogin":
             alertInsert("index.php", "Administrador registrado", "Registro correcto, por favor inicie sesión a continuación", "success");
+            break;
+        case "errTable":
+            // alertInsert("#", "Error", "Parece que modificaste el indentificador del formulario", "error");
+            location.reload();
+            break;
+        case "errSelect":
+            // alertInsert("#", "Error", "No es posible agregar el documento, la privacidad debe coincidir con un valor de la Base de Datos", "error");
+            location.reload();
             break;
         default:
             break;
@@ -167,3 +179,19 @@ export{
     alert,
     confirmQuestion
 }
+
+// ---------------- VALIDACIÓN PHP - CREATE --------------------------------
+// echo '<script type="text/javascript">
+// Swal.fire({
+//     title: "Error",
+//     text: "Por favor rellene el formulario correctamente",
+//     icon: "error",
+//     confirmButtonColor: "#D13513",
+//     confirmButtonText: "Aceptar",
+//     allowOutsideClick: false
+// }).then((button)=>{
+//     if(button.isConfirmed === true){
+//         location.href = "createGalery.php"
+//     }
+// });
+// </script>';
