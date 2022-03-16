@@ -39,7 +39,7 @@ class Delete{
         }
     }
 
-
+    // GALERIA
     function deleteGalery($id_foto){
         try {
             $sql = "DELETE FROM galeria WHERE id_foto = ?";
@@ -63,7 +63,6 @@ class Delete{
             return "error";
         }
     }
-    // CATEGORIA
     // NOTICIA
     function getImageNews($id_noticia){
         $sql = "SELECT id_foto FROM galeria WHERE id_noticia = ?";
@@ -108,7 +107,6 @@ class Delete{
             return "error";
         }
     }
-    // NOTICIA
 
     // DOCUMENTO
     function deleteDocument($id_documento){
@@ -122,7 +120,6 @@ class Delete{
             return "error";
         }
     }
-    // DOCUMENTO
 
     // DIRECTORIO
     function deleteDirectory($id_directorio){

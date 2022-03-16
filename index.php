@@ -1,196 +1,134 @@
 <?php 
-    include  "template/head.php";
-    include "template/header.php";
+  require  "template/head.php";
+  require "template/header.php";
+  require "sections/Inicio.php";
+  $query = new Inicio();
+  $arrNews = $query->createArr("id_noticia","noticia");
 ?>
-
-<!--slider-->
+<!--------------------- PÁGINA DE INICIO ---------------------------->
 <div class="container bg">
   <br>
-<div id="carouselExampleIndicators" class="carousel slider" data-bs-ride="carousel">
-  <div class="carousel-inner slider">
-    <div class="carousel-item active">
-      <img src="img/agri.jpg">
+  <!--slider-->
+  <div id="carouselExampleIndicators" class="carousel slider" data-bs-ride="carousel">
+    <div class="carousel-inner slider">
+      <div class="carousel-item active">
+        <img src="img/agri.jpg">
+      </div>
+      <div class="carousel-item ">
+        <img src="img/agri2.jpg">
+      </div>
+      <div class="carousel-item">
+        <img src="img/agri3.jpg">
+      </div>
     </div>
-    <div class="carousel-item ">
-      <img src="img/agri2.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="img/agri3.jpg">
+    <a class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+  </div>
+  <br>
+  <!--slider-->
+  <!--Noticia-->  
+  <div class="">
+    <br>
+    <h3 class="text-center" class="font-weight-light">Destacados</h3>
+    <hr>
+    <div class="bd-example efct1">
+      <section>
+          <?php
+          $destacados = count($arrNews);
+          if($destacados){
+          $news1 = $query->readNewsDestacados($arrNews[$destacados-1]);
+          $res1 = $news1->fetch();
+          // $titulo = $query->cleanUrl($res1['titulo']);
+          ?>
+          <div class="container text-center bg efe">
+              <h4 class="text-black efe"><a href="noticia/<?php echo $res1['id_noticia']; ?>" class="enlace-not"><?php echo $res1['titulo']; ?></a></h4>
+              <p class="lead text-black"></p>
+              <?php
+              $image = $query->getImage($res1['id_noticia']);
+              if($image){
+                foreach($image as $img){
+                ?><img src="<?php echo $img['archivo'];?>" alt="<?php echo $img['nom_foto'];?>" class="responsive-img img-destacados"><?php
+                }
+              }
+              ?>
+              <br>
+          </div>
+          <br>
+          <hr>
+          <?php
+          if($destacados >= 2){
+            $news2 = $query->readNewsDestacados($arrNews[$destacados-2]);
+            $res2 = $news2->fetch();
+            ?>
+          <div class="container text-center bg efe">
+              <h4 class="text-black efe"><a href="noticia/<?php echo $res2['id_noticia']; ?>" class="enlace-not"><?php echo $res2['titulo']; ?></a></h4>
+              <p class="lead text-black"></p>
+              <?php
+              $image = $query->getImage($res2['id_noticia']);
+              if($image){                    
+                foreach($image as $img){
+                  ?><img src="<?php echo $img['archivo'];?>" alt="<?php echo $img['nom_foto'];?>" class="responsive-img img-destacados"><?php
+                }
+              }
+              ?>
+              <br>
+          </div>
+          <br>
+          <?php 
+          }
+        } ?>
+      </section>
+      <br>
+      <!--Noticia-->
+      <!--galeria-->
+      <div class="row">
+        <?php
+        $moreNews = $query->readMoreNews($arrNews[$destacados-1],$arrNews[$destacados-2]);
+        if($moreNews){
+          foreach($moreNews as $more){
+            ?>
+            <div class="col-3">
+              <div class="border art">
+                <div class="">
+                  <?php
+                    $image = $query->getImageOne($more['id_noticia']); 
+                    if(!$image){
+                      ?><img src="https://programacion.net/files/article/20160819020822_image-not-found.png" alt="Imágen no disponible" class="responsive-img img-news_more"><?php
+                    }else{
+                      $img = $image->fetch();
+                        ?>
+                        <img src="<?php echo $img['archivo'];?>" alt="<?php echo $img['nom_foto'];?>" class="responsive-img img-news_more">
+                        <?php
+                    }
+                  ?>
+                </div>
+                <div class="title">
+                  <h6><a href="noticia/<?php echo $more['id_noticia']; ?>" class="enlace-not"><?php echo $more['titulo']; ?></a></h6>
+                </div>
+                <div class="des">
+                  <p><?php echo $more['descripcion'];?></p>
+                </div>
+                <div class="btn-more">
+                  <a href="noticia/<?php echo $more['id_noticia']; ?>" class='btn-success btn-sm'>Leer más</a>
+                </div>
+              </div>
+            </div>
+            <?php
+          }
+        }
+        ?>
+      </div>
+      <br>
+      <!--galeria-->
     </div>
   </div>
-  <a class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-</a>
-  <a class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-</a>
-</div>
-<!--slider-->
-<br>
-
-    <!--Noticia-->
-    <div class="">
-      <br>
-        <h3 class="text-center" class="font-weight-light">Destacados</h3>
-      <hr>
-      <div class="bd-example efct1">
-      
-        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-          <ul class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-          </ul>
-          <div class="container bg">
-            <section class>
-                    <div class="container text-center bg efe">
-                        <h3 class="text-black efe">Actividad junto con preparatoria Conalep, cerca de nuestra instalación UTT</h3>
-                        <p class="lead text-black"></p>
-                        <img src="img/6.JPG" alt="" width="300px" class="responsive-img">
-                        <img src="img/7.JPG" alt="" width="300px" class="responsive-img">
-                        <img src="img/6.JPG" alt="" width="300px" class="responsive-img">
-                        <br>
-                    </div>
-                    <br>
-                    <div class="container text-center bg">
-                        <hr>
-                            <h3 class="text-black efe">Sembrado de jitomate en nuestras instalaciones.</h3>
-                            <p class="lead text-black">
-                            </p>
-                            <img src="img/sembra.jpg" alt="" width="300px" class="responsive-img">
-                            <img src="img/sembra.jpg" alt="" width="300px" class="responsive-img">
-                            <img src="img/sembra.jpg" alt="" width="300px" class="responsive-img">
-                        </div>
-                        <br>
-                            <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                            </nav>
-                            <br>
-                </section>
-            </div>
-            <br>
-
-<!--Fin noticias-->
-
-
-<!--galeria-->
-<div class="row">
-    <div class="col-3">
-  <div class="">
-      
-    <div class="image">
-       <img src="img/2.jpg">
-    </div>
-    <div class="title">
-      <h1>
-     Write title Here</h1>
-     </div>
-    <div class="des">
-     <p>Es el cultivo de diferentes plantas, semillas y frutos, para proveer de alimentos al ser humano o al ganado y de materias primas a la industria.
-  
-    </p>
-    <a href='' class='btn-success btn-sm'>Leer más</a>
-    </div>
-    </div>
-    </div>
-    <div class="col-3">
-      
-      <div class="">
-      
-      <div class="image">
-         <img src="img/2.JPG">
-      </div>
-      <div class="title">
-        <h1>
-       Write title Here</h1>
-       </div>
-      <div class="des">
-       <p>Es el cultivo de diferentes plantas, semillas y frutos, para proveer de alimentos al ser humano o al ganado y de materias primas a la industria.
-    
-      </p>
-      <a href='' class='btn-success btn-sm'>Leer más</a>
-      </div>
-      </div>
-      
-      </div>
-      <div class="col-3">
-      
-        <div class="">
-        
-        <div class="image">
-           <img src="img/2.JPG">
-        </div>
-        <div class="title">
-          <h1>
-         Write title Here</h1>
-         </div>
-        <div class="des">
-         <p>Es el cultivo de diferentes plantas, semillas y frutos, para proveer de alimentos al ser humano o al ganado y de materias primas a la industria.
-      
-        </p>
-        <a href='' class='btn-success btn-sm'>Leer más</a>
-        </div>
-        </div>
-        
-        </div>
-        <div class="col-3">
-      
-        <div class="">
-        
-        <div class="image">
-           <img src="img/2.JPG">
-        </div>
-        <div class="title">
-          <h1>
-         Write title Here</h1>
-         </div>
-        <div class="des">
-         <p>Es el cultivo de diferentes plantas, semillas y frutos, para proveer de alimentos al ser humano o al ganado y de materias primas a la industria.
-      
-        </p>
-        <a href='' class='btn-success btn-sm'>Leer más</a>
-        </div>
-        </div>
-        
-        </div>
-      </div>
-<!--card fin-->
-<br>
-   <!--Documentos-->
-
-          <div class="card1">
-            <div class="card-body"> 
-              <h5 class="card-title-center">Documentos</h5> 
-              <i class="direct bi bi-person-square"></i> 
-              <input class="btn-success btn-sm" type="button" onclick="" location.href='docpublicos.php' value="Doc. Públicos" name="boton" />
-              <br>
-              <hr>
-              <br>
-              <h5 class="card-title-center">Directorio</h5>
-              <i class="documt bi bi-wallet2"></i>
-              <input class="btn-success btn-sm" type="button" onclick="" location.href='directorio.php' value="Directorio Comité" name="boton" />
-             <div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-<!--Documentos-->
-</div>
-</div>
 </div>
 <br>
 <?php 
-    include "template/footer.php";
-    include "template/scripts.php";
+    require "template/footer.php";
+    require "template/scripts.php";
 ?>

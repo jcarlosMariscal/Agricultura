@@ -46,10 +46,21 @@ CONSTRAINT FOREIGN KEY (id_noticia) REFERENCES noticia(id_noticia) ON DELETE CAS
 );
 
 CREATE TABLE administrador(
+id_admin INT primary key auto_increment NOT NULL,
 nombre VARCHAR (60) NOT NULL,
-pass VARCHAR(255) NOT NULL
+pass VARCHAR(255) NOT NULL,
+intentos INT NULL
 );
 
 CREATE TABLE acceso_doc(
-pass VARCHAR(255) NOT NULL
+id_doc INT primary key auto_increment NOT NULL,
+pass VARCHAR(255) NOT NULL,
+intentos INT NULL
 );
+
+
+INSERT INTO directorio (nombre,url,estado,carrera,email,telefono) VALUES
+('Universidad Mesoamericana','https://www.tehuacan.umaweb.edu.mx/','Puebla','Licenciatura en Ingeniería Agronómica Fitotecnista','uni.meso.puebla@gmail.com','2221249598'),
+('Universidad Autonóma de Chihuahua','https://uach.mx/','Chihuahua','Licenciatura en Sistemas de Información Agrícola','uni.chihuahua@gmail.com','2221249598'),
+('Universidad Tecnológica de Tula','https://www.uttt.edu.mx/','Hidalgo','T.S.U en Agricultura Sustentable y Protegida','uni.meso.puebla@gmail.com','2221249598'),
+('Universidad Autónoma San Nicolas de los Garza','https://www.uanl.mx/','Nuevo León','Maestria en Ciencias en Producción Agrícola','uni.ejemplo3@gmail.com','2221249598');

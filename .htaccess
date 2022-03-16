@@ -1,1 +1,15 @@
 ErrorDocument 404 http://localhost/Projects/Agricultura/page_error.php
+Options -Indexes
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+RewriteEngine On
+RewriteRule inicio index.php [L]
+RewriteRule ^noticias$ sections/noticias.php [L]
+RewriteRule ^directorio$ sections/directorio.php [L]
+RewriteRule ^galeria$ sections/galeria.php [L]
+RewriteRule ^documentos$ sections/publicos.php [L]
+RewriteRule ^login$ sections/login.php [L]
+RewriteRule ^privados$ sections/privados.php [L]
+RewriteRule ^noticia/([\wÀ-ÿ\-(\@\$\%\&(\))\.\,\¿\?\¡\!]+)$ sections/noticia.php?noticia=$1 [L]

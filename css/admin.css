@@ -45,6 +45,10 @@ h5{
     color: #f4f4f4;
     margin: 5px 2px;
   }
+.btn-inicio:hover{
+    background-color: #648564;
+    color: #fff;
+  }
 /* -------------------- BOTONONES DE OPCION HEADER  ----------------------- */
   i{
     padding: 0 3px 0 0;
@@ -61,6 +65,10 @@ h5{
   /* mover los a */
   .mover-a{
     float: right;
+    font-size: 20px;
+}
+.mantener{
+  font-size: 20px;
 }
 
 /* -------------------- BOTONES TABLA DE REGISTROS----------------------- */
@@ -71,7 +79,20 @@ background-color: #47874a;
 color: #f4f4f4;
 /* display: block; */
 }
+.boton3:hover{
+background-color: #648564;
+color: #f4f4f4;
+/* display: block; */
+}
 /* -------------------- BOTONES TABLA DE REGISTROS----------------------- */
+
+/*--------------------- --------------*/
+.img-gal-admin{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+/*--------------------- --------------*/
 
 @media screen and (max-width: 640px) {
   .form-signin #text{
@@ -98,7 +119,8 @@ color: #f4f4f4;
     width: 100%;
 }
 .btn-admin:hover{
-    color: #000;
+  background-color: #648564;
+    color: #fff;
 }
 .card {
   background-color: #ffffff;
@@ -122,6 +144,10 @@ color: #f4f4f4;
   color: #f4f4f4;
   font-size: 20px;
 }
+.form-signin button:hover{
+  background-color: #557457;
+  color: #fff;
+}
 .card-container.card {
   border: none;
 }
@@ -141,7 +167,8 @@ color: #f4f4f4;
   max-width: 50vw;
 }
 .btn-form{
-  width: 10vw;
+  text-align: center;
+  width: auto;
 }
 /* -------------------- TAMAÑO Y CENTRADO DE FORMULARIOS */
 input{
@@ -276,17 +303,18 @@ input[type="checkbox"]:checked + .check {
 
 /* ------------------COLOR BOTONES TABLA ----------------*/
 .delete{
-  background-color: #D13513;
+  background-color: #c73b1b;
 }
 .delete:hover{
-  background-color: #97250B;
+  background-color: #9b2e15;
   color: #fff;
 }
 .update{
-  background-color: #1644A0;
+  background-color: #125e8a;
 }
 .update:hover{
-  background-color: #0F3786;
+  transition: all 0.5s ease;
+  background-color: #0b4363;
   color: #fff;
 }
 /* ------------------COLOR BOTONES TABLA ----------------*/
@@ -299,3 +327,61 @@ input[type="checkbox"]:checked + .check {
 .sec-admin{
   margin-bottom: 2px;
 }
+
+/* ---------------------- PAGINADOR ----------------- */
+.paginacion{
+  padding: 10px;
+  text-align: center;
+}
+.paginacion a{
+  text-decoration: none;
+  font-size: 16px;
+}
+.paginacion a{
+  background: #9bb99c;
+}
+.paginacion a:hover{
+  background: #557457;
+  color: #fff;
+}
+
+ul.paginador {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.paginador li {display: inline;}
+
+ul.paginador li a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid white;
+}
+
+.paginador li:first-child a {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.paginador li:last-child a {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+ul.paginador li a.active {
+  background-color: #47874a;
+  color: white;
+  border: 1px solid var(--header-footer);
+}
+.disabled { 
+  pointer-events: none; 
+  cursor: default; 
+} 
+.disabled a{
+  background: #b6b9b6;
+}
+/* ---------------------- PAGINADOR ----------------- */

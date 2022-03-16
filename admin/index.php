@@ -1,4 +1,5 @@
 <?php
+// <!-- FORMULARIO DE INICIO DE SESIÓN DEL ADMINISTRADOR -->
 session_start();
 if (isset($_SESSION["admin"])){
     header("Location: main.php");
@@ -17,7 +18,6 @@ if (isset($_SESSION["admin"])){
 <hr>
 <br>
 <br><br><br>
-<!-- FORMULARIO DE INICIO DE SESIÓN DEL ADMINISTRADOR -->
 <body class="bc">
     <div class="container">
         <br>
@@ -31,7 +31,6 @@ if (isset($_SESSION["admin"])){
                 }else{
                     ?><p class="text-center">Inicie sesión</p><?php
                 }
-                // VALIDAR SI EXISTE UN ADMINISTRADOR
             ?>
             <hr size="4" style="color: #47874a;">
             <noscript>
@@ -73,6 +72,5 @@ if (isset($_SESSION["admin"])){
         </div>
     </div>
 </body>
-<!-- FORMULARIO DE INICIO DE SESIÓN DEL ADMINISTRADOR -->
 <script src="js/create.js" type="module"></script>
 </html>

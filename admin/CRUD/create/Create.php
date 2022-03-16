@@ -20,16 +20,13 @@ class Create{
     function readCategory(){ return $this->helper->readCategory($this->cnx); }
     function readTitleNews($id_noticia){ return $this->helper->readTitleNews($id_noticia,$this->cnx); }
     function idUpdate($table,$field,$id){ return $this->helper->idUpdate($this->cnx,$table,$field,$id); }
-        // ------------ VALIDAR SI UN REGISTRO YA EXISTE ANTES DE AGREGAR O ACTUALIZAR
     // ---------------------------- -----  --------------------
     function repeated($table,$field,$value){
         $sql = "SELECT $field FROM $table WHERE $field = ?";
         $query = $this->cnx->prepare($sql);
         $query->bindParam(1,$value);
         $query->execute();
-        if($query->rowCount() === 0){
-            return false;
-        }
+        if($query->rowCount() === 0) return false;
         return true;
     }
 
@@ -118,6 +115,40 @@ class Create{
             return "successImageNews";
         }  catch (PDOException $th) {
             return "insertError";
+        }
+    }
+    // ------------------- CREAR CONTRASEÑA DOCUMENTOS PRIVADOS ----------------------
+    function createPassword($password){
+        try {
+            $sql = "INSERT INTO acceso_doc(pass) VALUES (?)";
+            $query = $this->cnx->prepare($sql);
+            $encrypt = password_hash($password,PASSWORD_BCRYPT);
+            $query-> bindParam(1,$encrypt);
+            $insert = $query -> execute();
+            echo "successPassword";
+        }catch (PDOException $th) {
+            echo "errorPassword";
+        }
+    }
+    // --------------------- VALIDAR SI LA CONTRASEÑA ES CORRECTA PARA ACCEDER A DOCUMENTOS PRIVADOS
+    function toAccess($password){
+        session_start();
+        try {
+            $doc = 1;
+            $sql = "SELECT * FROM acceso_doc WHERE id_doc = ?";
+            $query = $this->cnx->prepare($sql);
+            $query -> bindParam(1,$doc);
+            if($query->execute()){
+                foreach($query as $data){
+                    if(password_verify($password,$data['pass'])){
+                        $_SESSION["privado"] = $data; // GUARDA LA SESIÓN PARA USARLO DESPUÉS
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }catch (PDOException $th) {
+            echo "loginError";
         }
     }
 }

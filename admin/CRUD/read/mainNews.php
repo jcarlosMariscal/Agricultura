@@ -5,9 +5,12 @@
   if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainNews.php"){
       header("Location: ../../main.php");
   }
+  $recibido = (int) filter_var($url, FILTER_SANITIZE_NUMBER_INT); 
+  if($recibido === 0) $recibido=1;
+  $rango = 5;
   require "Read.php";
   $query = new Read();
-  $news = $query->readNews();
+  $news = $query->readNews($recibido,$rango);
   $category = $query->readCategory();
   $url = "http://".$_SERVER['HTTP_HOST']."/Projects/Agricultura/noticias.php";
 ?>
@@ -18,7 +21,7 @@
       echo "Antes de agregar una noticia tiene que agregar una categoria. <a href='CRUD/create/createCategory.php'>Agregar</a>";
     }?>
   </p>
-  <a class="mover-a" href="<?php echo $url; ?>" target="_blank">Visualizar</a>
+  <a class="mover-a" href="../noticias" target="_blank">Visualizar</a>
   <br><br>
   <div class="table-responsive">
     <table class="table ">
@@ -47,12 +50,12 @@
                       <?php
                         $validate = $query->searchImageNews($data['id_noticia']);
                         if($validate === 0){
-                          ?><a href="CRUD/create/addImageNews.php?id_noticia=<?php echo $data["id_noticia"]; ?>">Seleccionar</a><?php
+                          ?><div class="text-center"><a href="CRUD/create/addImageNews.php?id_noticia=<?php echo $data["id_noticia"]; ?> " style="color:red">Seleccionar</a></div><?php
                         }else{
                           $image = $query->getImage($data['id_noticia']);
                           if($image){
                             foreach($image as $img){
-                              ?><a target="_blank" href="../<?php echo $img['archivo']; ?>" style="color:#47874a">Ver Imagen</a> <br><?php
+                              ?><div class="text-center"><a target="_blank" href="../<?php echo $img['archivo']; ?>" >Ver</a></div><?php
                             }
                           }
                         }
@@ -82,5 +85,10 @@
     </table>
   </div>
   <br>
+  <?php
+    $paginador = $query ->paginador("id_noticia","noticia",$recibido,$rango,"admin");
+    $section = "noticias";
+    require "helper/paginador.php";
+  ?>
 </div>
 <script src="js/delete.js" type="module"></script>

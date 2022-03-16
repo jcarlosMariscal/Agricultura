@@ -5,14 +5,26 @@ $url= $_SERVER["REQUEST_URI"];
 if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainDocuments.php"){
     header("Location: ../../main.php");
 }
+  $recibido = (int) filter_var($url, FILTER_SANITIZE_NUMBER_INT); 
+  if($recibido === 0) $recibido=1;
+  $rango = 5;
   require "Read.php";
   $query = new Read();
-  $documents = $query->readDocuments();
-  $url = "http://".$_SERVER['HTTP_HOST']."/Projects/Agricultura/publicos.php";
+  $documents = $query->readDocuments($recibido,$rango);
+  $verificate = $query->verificatePassword();
 ?>
 <div class="container main">
   <h1 class="welcome text-center">Documentos</h1>
-  <a class="mover-a" href="<?php echo $url; ?>" target="_blank">Visualizar</a>
+  <div>
+  <?php
+  if ($verificate){
+    ?><a class="mantener" href="CRUD/update/updatePassword.php">Modificar contraseña</a><?php
+  }else{
+    ?><a class="mantener" href="CRUD/create/createPassword.php">Agregar contraseña</a><?php
+  }
+  ?>
+  <a class="mover-a" href="../documentos" target="_blank">Visualizar </a>
+  </div>
   <br><br>
   <div class="table-responsive">
     <table class="table">
@@ -38,7 +50,7 @@ if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRU
                     <td><?php echo $data["id_documento"]; ?></td>
                     <td><?php echo $data["nombre"]; ?></td>
                     <td><?php echo $data["descripcion"];; ?></td>
-                    <td><a href="../<?php echo $data['archivo']; ?>" target="_blank">Ver</a></td>
+                    <td><div class="text-center"><a href="../<?php echo $data['archivo']; ?>" target="_blank">Ver</a></div></td>
                     <td>
                       <?php 
                       if($data["privacidad"] === 1){
@@ -61,5 +73,10 @@ if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRU
     </table>
   </div>
   <br>
+  <?php
+    $paginador = $query ->paginador("id_documento","documento",$recibido,$rango,"todo");
+    $section = "documentos";
+    require "helper/paginador.php";
+  ?>
 </div>
 <script src="js/delete.js" type="module"></script>

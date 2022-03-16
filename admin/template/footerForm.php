@@ -1,3 +1,4 @@
+        <!-- FOOTER ADMIN FORM -->
         <footer>
                 <hr size="10" style="background: green;">
                 <img class="img-abajo img-fluid" src="../../../img/comite.png" width="200px" alt="">

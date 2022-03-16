@@ -23,6 +23,7 @@ class Update{
     function readCategoryID($id){ return $this->helper->readCategoryID($this->cnx,$id); }
     function readPrivacityForm($id){ return $this->helper->readPrivacityForm($this->cnx,$id); }
     function idUpdate($table,$field,$id){ return $this->helper->idUpdate($this->cnx,$table,$field,$id); }
+
         // ------------ VALIDAR SI UN REGISTRO YA EXISTE ANTES DE AGREGAR O ACTUALIZAR
     function repeated($table,$field,$fieldID,$value,$valueID){
         $sql = "SELECT $field FROM $table WHERE $field = ? AND $fieldID != ?";
@@ -30,9 +31,7 @@ class Update{
         $query->bindParam(1,$value);
         $query->bindParam(2,$valueID);
         $query->execute();
-        if($query->rowCount() === 0){
-            return false;
-        }
+        if($query->rowCount() === 0) return false;
         return true;
     }
 
@@ -41,9 +40,7 @@ class Update{
         $sql = "SELECT * FROM $table WHERE $field = ?";
         $query = $this->cnx->prepare($sql);
         $query->bindParam(1,$id);
-        if($query->execute()){
-            return $query;
-        }
+        if($query->execute()) return $query;
     }
 
     // RECIBE LOS NUEVOS DATOS PARA ACTUALIZARLOS
@@ -133,6 +130,21 @@ class Update{
             return "successImageNews";
         } catch (PDOException $th) {
             return "errorImageNews";
+        }
+    }
+    // ------------ CAMBIAR LA CONTRASEÑA PARA DOCUMENTOS PRIVADOS ----------------
+    function updatePassword($password){
+        try {
+            $p=1;
+            $sql = "UPDATE acceso_doc SET pass = ? WHERE id_doc = ?";
+            $query = $this->cnx->prepare($sql);
+            $encrypt = password_hash($password,PASSWORD_BCRYPT);
+            $query-> bindParam(1,$encrypt);
+            $query-> bindParam(2,$p);
+            $insert = $query -> execute();
+            echo "successPassword";
+        }catch (PDOException $th) {
+            echo "errorPassword";
         }
     }
 }

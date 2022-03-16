@@ -1,0 +1,183 @@
+<?php
+$id = $_GET["noticia"];
+require "Read.php";
+$query = new Read();
+$noticia = $query->readNewsId($id);
+$res = $noticia->fetch();
+$arrImage = $query->getImageArrId($id);
+
+$conImg;
+if(!$arrImage){
+    $imgMain = "https://programacion.net/files/article/20160819020822_image-not-found.png";
+    $imgDescription = "Esta noticia no tiene ninguna imágen, si cree que ha ocurrido un error por favor contacté al administrador.";
+    $conImg = false;
+}else{
+    $mainImageId = $arrImage[mt_rand(0, count($arrImage) - 1)];
+    $mainImg = $query->readImgId($mainImageId);
+    $resMainImg = $mainImg->fetch();
+    $imgMain = "../".$resMainImg['archivo'];
+    $imgDescription = $resMainImg['descripcion'];
+    $conImg = true;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Agricultura</title>
+    
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bc">
+  <header>
+    <nav>
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-3">
+              <div class="logo">
+                <a href="index.php?p=inicio"> <img src="../img/comite.png" alt=""></a>
+              </div>
+          </div>
+              
+          <div class="col-sm-3"> </div>
+            <div class="col-sm-6">
+              <div class="enlaces uno" id="enlaces">
+                <a class="btn-outline-success" href="../inicio">Inicio</a>
+                <a class="btn-outline-success" href="../noticias">Noticias</a>
+                <a class="btn-outline-success" href="../directorio">Directorio</a>
+                <a class="btn-outline-success" href="galeria">Galeria</a>
+                
+                
+                <div class="btn-group">
+                    <a class="btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Documentos</a>
+                    <div class="dropdown-menu">
+                    <a href="--/documentos" class="dropdown-item">Publicos</a>
+                        <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="../login">Privados</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </nav>
+  </header> 
+    <div class="container bg">
+        <br>
+        <hr>
+        <section class="noticia">
+            <div class="titulo">
+                <h2 class="text-center" class="font-weight-light"> <?php echo $res['titulo']; ?> </h2>
+            </div>
+            <div class='noticia-image'>
+                <img src="<?php echo $imgMain ?>" alt="Imágen no disponible" class="sec-noti-img"> 
+            </div>
+            <div class="detalles">
+                <p><?php echo $imgDescription; ?></p>
+                <?php
+                    $cat = $query->readCategoryId($res['categoria']);
+                    $resul = $cat->fetch();
+                ?>
+                <br><br>
+                <p>- <?php echo $resul['categoria'];?></p>
+                <p><i><?php echo $res['fecha'];?> - Comite Nacional de Agricultura</i></p>
+            </div>
+            <div class="contenido">
+                <?php echo $res['texto']; ?>
+            </div>
+        </section>
+        <?php
+            if($conImg){
+                ?>
+        <section class="more-img-noti">
+            <div class="imagen">
+                <h4 class="text-center" class="font-weight-light">Más imágenes</h4>
+                <?php
+                    $moreImg = $query->readMoreImgId($mainImageId,$id);
+                    if($moreImg){
+                        foreach($moreImg as $img){
+                            ?>
+                            <div class='imagen-noticia'>
+                                <img src="../<?php echo $img['archivo']; ?>" alt="<?php echo $img['nom_foto']; ?>" class="sec-noti-img"> 
+                            </div>
+                            <?php
+                        }
+                    }
+                ?>
+            </div>
+        </section>
+                <?php
+            }
+        ?>
+        <section class="more-img clear">
+            <div class="noti-img">
+                <br>
+                <hr>
+                <h4 class="text-center" class="font-weight-light"> Noticias que le pueden interesar</h4>
+                <?php
+                    $moreNews = $query->readMoNews($res['categoria'],$id);
+                    if($moreNews){
+                        foreach($moreNews as $news){
+                            $getImg = $query->getImageOne($news['id_noticia']);
+                            if($getImg){
+                                $resImg = $getImg->fetch();
+                                $img  = "../".$resImg['archivo'];
+                            }else{
+                                $img  = "https://programacion.net/files/article/20160819020822_image-not-found.png";
+                            }
+                            ?>
+                <div class='img clear'>
+                    <img src="<?php echo $img;  ?>" alt="Imágen no disponible" class="sec-noti-img"> 
+                    <div class="info">
+                    <h4><a href="<?php echo $news['id_noticia']; ?>" class="enlace-not"><?php echo $news['titulo']; ?></a></h4>
+                    <p><?php echo $news['descripcion']; ?></p>
+                    </div>
+                </div>
+                            <?php
+                        }
+                    }
+                ?>
+            </div>
+        </section>
+    </div>
+    <br>
+    <br>
+    <footer>
+            <div class="footer-container">
+                <div class="footer-main">
+                    <div class="footer-columna1">
+                        <a href="index.php"><img src="../img/comite.png" class="img-fluid"
+                            alt="Responsive image"></a>
+                    </div>
+
+                    <div class="footer-columna">
+                        <h3><strong>Contáctanos</strong></h3>
+                        <h6><em>Prolongación de la 1 sur No. 1101 San Pablo Tepetzingo C.P. 75859 Tehuacán, Puebla <br>
+                            Tel: 01(238) 3803100 <br>
+                            Email: informacion@uttehuacan.edu.mx</em></h6>
+                    </div>
+
+                    <div class="footer-columna">
+                        <h3><strong>Redes sociales</strong></h3>
+                        <div class="row">
+                            <div class="col-md-3">
+
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="../iconos/facebook.png" class="rounded mx-auto d-block" class="img-fluid"
+                                alt="Responsive image"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="../iconos/youtube.png" class="img-fluid" alt="Responsive image"></a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

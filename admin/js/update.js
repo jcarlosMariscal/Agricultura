@@ -68,6 +68,8 @@ if(noEditor){
             data = [campos.cateoria,true,true,true,true,true];
         }else if(form.get("table") === "directorio"){
             data = [campos.nombre,campos.url,campos.estado,campos.carrera,campos.email,campos.telefono];
+        }else if(form.get("table") === "docsPriv"){
+            data = [campos.password];
         }
 
         if(form.get("table") === "imageNewsUp"){ // Form para actualizar imágenes seleccionados

@@ -6,7 +6,7 @@ const expresiones = { // REGEX, SE MANDA A LLAMAR DE ACUERDO AL CAMPO A VALIDAR
 	nombre: /^[a-zA-ZÀ-ÿ\s]{3,60}$/, // password: /^.{1,}$/, 
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,// Mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número          
 	descripcion: /^\¿?\¡?[\wÀ-ÿ\s(\#\@\$\%\&\(\)\.\,)]{5,255}\??\!?$/,
-    nombre100: /^\¿?\¡?[\wÀ-ÿ\s(\#\@\$\%\&\(\))\.\,]{5,100}\??\!?$/,
+    nombre100: /^\¿?\¡?[\wÀ-ÿ\s(\#\@\$\%\&\"\'\(\))\.\,]{5,100}\??\!?$/,
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     telefono: /^\d{7,14}$/,
     url: /^https?:\/\/[\w\-]+(\.[\w\-]+)+[\#?]?.*$/,

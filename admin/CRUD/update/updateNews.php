@@ -39,6 +39,7 @@ include "../../template/headerForm.php";
                 <div class="card card-container">
                         <div class="center-input input-group" id="group-titulo">
                             <span class="categoria-color input-group-text" id="basic-addon1">TITULO:</span>
+                            <!-- <?php echo $titulo; ?> -->
                             <input id="titulo" type="text" name="titulo"  class="form-control" value="<?php echo $titulo; ?>"  aria-label="Username" aria-describedby="basic-addon1">
                             <i class="input-icon bi"></i>
                             <p class="formInputError">El titulo debe tener un mínimo de 5 caracteres y no debe exceder de 100. Se permiten caracteres especiales como #, @, $, %, &, (, ).</p>

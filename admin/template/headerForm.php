@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="../../../css/admin.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <title>Document</title>
+    <link rel="icon" href="../../../img/favicon.png">
+    <title>Form-Admin</title>
 </head>
 </head>
 <body>
+    <!-- MENÚ ADMIN FORMULARIO -->
     <div class="container">
         <div class="letra">
             <img class="imagen img-fluid" src="../../../img/comite.png" alt="">

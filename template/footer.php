@@ -1,3 +1,4 @@
+<!----------------- FOOTER  ------------------->
         <footer>
             <div class="footer-container">
                 <div class="footer-main">
@@ -11,8 +12,6 @@
                         <h6><em>Prolongación de la 1 sur No. 1101 San Pablo Tepetzingo C.P. 75859 Tehuacán, Puebla <br>
                             Tel: 01(238) 3803100 <br>
                             Email: informacion@uttehuacan.edu.mx</em></h6>
-                        <!--li><h6><em>Tel: 01(238) 3803100</h6></em></li>
-                        <li><h6><em>Email: informacion@uttehuacan.edu.mx</h6></em></li-->
                     </div>
 
                     <div class="footer-columna">

@@ -4,15 +4,10 @@
     if (!isset($_SESSION["admin"])){
         header("Location: index.php");
     }
-
     include('template/header.php');
     ?>
 <?php
-    if(isset($_GET['p'])) {
-        $page = $_GET['p'];
-    }else{
-        $page = "galeria";
-    }
+    $page = (isset($_GET['p'])) ? $_GET['p'] : "galeria";
     switch ($page) {
         case 'galeria':
             include "CRUD/read/mainGalery.php";
@@ -38,7 +33,6 @@ include "template/footer.php"
 ?>
 <script>
     let msj = localStorage.getItem("msj");
-    // console.log(msj);
     if(msj === "true"){
         Swal.fire({
             title: "Bievenido <?php echo $_SESSION["admin"]["nombre"]; ?>!",

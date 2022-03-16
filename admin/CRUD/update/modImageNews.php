@@ -23,12 +23,12 @@
 ?>
         <div class="container">
             <h3 class="welcome text-center " class="categoria-color input-group-text" id="basic-addon1"><span hidden>Sección imageNewsUp</span>Seleccione imágenes para la noticia "<b><?php echo $title; ?></b>"</h3>
-            <p style="color: red" class="text-center">Las imágenes que se muestran son las que están relacionadas con la noticia, seleccione las que desea conservar</p>
+            <p style="color: red;font-weight: bold" class="text-center">Estas son las imágenes que fueron seleccionadas para esta noticia, ¿quiere hacer algún cambio?</p>
             <?php
             if($images->rowCount() === 0){
-                ?><p class="text-center">Esta noticia no tiene ninguna imágen actualemente. <a href="../create/addImageNews.php?id_noticia=<?php echo $id_noticia; ?>">¿Quiere agregar una?</a></p><?php
+                ?><p class="text-center" style="font-weight: bold">Esta noticia no tiene ninguna imágen actualemente. <a href="../create/addImageNews.php?id_noticia=<?php echo $id_noticia; ?>">Seleccionar una</a></p><?php
             }else{
-                ?><p class="text-center"><a href="../create/addImageNews.php?id_noticia=<?php echo $id_noticia; ?>" >Agregar otra imagen</a></p><?php
+                ?><p class="text-center"><a href="../create/addImageNews.php?id_noticia=<?php echo $id_noticia; ?>" >Seleccionar otra imagen</a></p><?php
             ?>
             <form id="formNoEditor" enctype="multipart/form-data" class ="form">
                 <input type="hidden" name="table" value="imageNewsUp">

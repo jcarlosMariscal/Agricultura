@@ -20,7 +20,6 @@ switch ($table) {
         $login = $query->login($nombre,$password);
         if($login){
             echo "success";
-            // header("Location: main.php");
         }else{
             echo "loginError";
         }

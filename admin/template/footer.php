@@ -1,4 +1,4 @@
-        <!-- <br><br><br><br><br>br*5 -->
+        <!-- FOOTER ADMIN -->
         <footer>
             <hr size="10" style="background: green;">
             <img class="img-abajo img-fluid" src="../img/comite.png" width="200px" alt="">

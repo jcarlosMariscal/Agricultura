@@ -104,40 +104,40 @@ function alert(data,checkbox,action){ // FUNCIÓN QUE LLAMA LAS ALERTAS DEPENDIE
     }
     switch (data) { // RECIBE LOS VALORES QUE DEVUELVE PHP AL HACER UN REGISTRO, DEPENDIENDO DE ESO SE LLAMA UNA ALERTA
         case "successGal":
-            alertInsert("../../main.php",`${title}`, `La imágen se ha ${msgSuccess} correctamente`, "success");
+            alertInsert("../../main",`${title}`, `La imágen se ha ${msgSuccess} correctamente`, "success");
             break;
         case "errorGal":
-            alertInsert("../../main.php", "Error", `No se ha podido ${msgError} la imágen a la galeria`, "error");
+            alertInsert("../../main", "Error", `No se ha podido ${msgError} la imágen a la galeria`, "error");
             break;
         case "successDoc":
-            alertInsert("../../main.php?p=documentos",`${title}`, `El documento se ha ${msgSuccess} correctamente`, "success");
+            alertInsert("../../documentos",`${title}`, `El documento se ha ${msgSuccess} correctamente`, "success");
             break;
         case "errorDoc":
-            alertInsert("../../main.php?p=documentos", "Error", "No se ha podido insertar el documento", "error");
+            alertInsert("../../documentos", "Error", "No se ha podido insertar el documento", "error");
             break;
         case "successDir":
-            alertInsert("../../main.php?p=directorio",`${title}`, `La UT se ha ${msgSuccess} al directorio`, "success");
+            alertInsert("../../directorio",`${title}`, `La UT se ha ${msgSuccess} al directorio`, "success");
             break;
         case "errorDir":
-            alertInsert("../../main.php?p=directorio", "Error", "No se ha podido insertar la UTT en el directorio", "error");
+            alertInsert("../../directorio", "Error", "No se ha podido insertar la UTT en el directorio", "error");
             break;
         case "successCat":
-            alertInsert("../../main.php?p=categoria",`${title}`, `La categoria se ha ${msgSuccess}`, "success");
+            alertInsert("../../categoria",`${title}`, `La categoria se ha ${msgSuccess}`, "success");
             break;
         case "errorCat":
-            alertInsert("../../main.php?p=categoria", "Error", "No se ha podido insertar la categoria", "error");
+            alertInsert("../../categoria", "Error", "No se ha podido insertar la categoria", "error");
             break;
         case "errorNews":
-            alertInsert("../../main.php?p=noticias", "Error", "No se ha podido insertar la noticia", "error");
+            alertInsert("../../noticias", "Error", "No se ha podido insertar la noticia", "error");
             break;
         case "errorImageNews":
-            alertInsert("../../main.php?p=noticias", "Error", "No se han podido eliminar las imágenes", "error");
+            alertInsert("../../noticias", "Error", "No se han podido eliminar las imágenes", "error");
             break;
         case "anyImageNews":
-            alertQuestion("../../main.php?p=noticias", "Imágen no seleccionado", "No ha seleccionado ninguna imagén, ¿Quiere continuar?");
+            alertQuestion("../../noticias", "Imágen no seleccionado", "No ha seleccionado ninguna imagén, ¿Quiere continuar?");
             break;
         case "equal":
-            alertQuestion("../../main.php?p=noticias", "Sin cambios", "No ha realizado ningúna modificación, ¿Quiere continuar?");
+            alertQuestion("../../noticias", "Sin cambios", "No ha realizado ningúna modificación, ¿Quiere continuar?");
             break;
         case "exists":
             alertInsert("index.php", "Error", "Ya existe un administrador en la Base de Datos", "error");
@@ -151,6 +151,12 @@ function alert(data,checkbox,action){ // FUNCIÓN QUE LLAMA LAS ALERTAS DEPENDIE
         case "successLogin":
             alertInsert("index.php", "Administrador registrado", "Registro correcto, por favor inicie sesión a continuación", "success");
             break;
+        case "successPassword":
+            alertInsert("../../documentos", `${title}`, `La contraseña para documentos privados se ha ${msgSuccess} correctamente.`, "success");
+            break;
+        case "errorPassword":
+            alertInsert("../../documentos", "Registro incorrecto", "La contraseña se no se pudo registrar a la base de datoss", "error");
+            break;
         case "errTable":
             // alertInsert("#", "Error", "Parece que modificaste el indentificador del formulario", "error");
             location.reload();
@@ -163,7 +169,7 @@ function alert(data,checkbox,action){ // FUNCIÓN QUE LLAMA LAS ALERTAS DEPENDIE
             break;
     }
     if(data === "successNewsUp"){
-        alertInsert("../../main.php?p=noticias", `${title}`, `La noticia de ha ${msgSuccess} correctamente`, "success");
+        alertInsert("../../noticias", `${title}`, `La noticia de ha ${msgSuccess} correctamente`, "success");
     }else if(data.includes("successNews")){ // ALERTA ESPECIAL PARA NOTICIAS // Registro exitoso
         let regex = /(\d+)/g;
         alertNews(`addImageNews.php?id_noticia=${data.match(regex)[0]}`);
@@ -171,7 +177,7 @@ function alert(data,checkbox,action){ // FUNCIÓN QUE LLAMA LAS ALERTAS DEPENDIE
     if(data.includes("successImageNews")){ // ALERTA ESPECIAL PARA SELECCIONAR IMAGENES A LA NOTICIA
         if(action === "add"){
             console.log(msgNews);
-            alertInsert("../../main.php?p=noticias", "Registro exitoso", `${msgNews}`);
+            alertInsert("../../noticias", "Registro exitoso", `${msgNews}`);
         }
     }
 }

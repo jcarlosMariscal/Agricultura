@@ -11,7 +11,7 @@ class RegisterDB{
     public $cnx;
     public $helper;
     function __construct(){ 
-        $this -> cnx = Connection::connectDB(); // Guarda la conexión en una variable para después usarla.
+        $this -> cnx = Connection::connectDB();
     }
 
     // VERIFICA SI EXISTE UN ADMINISTRADOR
@@ -44,14 +44,28 @@ class RegisterDB{
         $query -> bindParam(1,$nombre);
         if($query->execute()){
             foreach($query as $data){
-                if(password_verify($password,$data['pass'])){
+                if(password_verify($password,$data['pass']) && $nombre === $data['nombre']){
+                    $this->updateFailedAttempts("administrador",NULL,"id_admin",$data['id_admin']);
                     $_SESSION["admin"] = $data; // GUARDA LA SESIÓN PARA USARLO DESPUÉS
                     return true;
                 }else{
+                    if($data['intentos'] < 2){
+                        $intentos = $data['intentos']+1;
+                        $this->updateFailedAttempts("administrador",$intentos,"id_admin",$data['id_admin']);
+                    }else{
+                        echo "limite";
+                    }
                     return false;
                 }
             }
-        }  
+        }
     }
+    // function updateFailedAttempts($table,$intentos, $field, $value){
+    //     $sql = "UPDATE $table SET intentos = ? WHERE $field = ?";
+    //     $query = $this->cnx->prepare($sql);
+    //     $query -> bindParam(1,$intentos);
+    //     $query -> bindParam(2,$value);
+    //     $query->execute();
+    // }
 }
 ?>

@@ -222,6 +222,22 @@ switch ($table) {
             }
         }
         break;
+    case 'docsPriv':
+        if(!empty($_POST)){
+            $password = (isset($_POST['password']) ? $_POST['password'] : NULL);
+            if(empty($password)){
+                echo "errForm";
+                return;
+            }
+            $regexPass = $regex->validateField('password',$password); // $regexText = $regex->validateField('nombre100',$texto);
+            if($regexPass){
+                $res = $query->updatePassword($password);
+                echo $res;
+            }else{
+                echo "Error: Por favor rellena el formulario correctamente";
+            }
+            }
+        break;
     default:
         header("Location: ../../main.php");
         break;

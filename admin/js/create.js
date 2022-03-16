@@ -38,11 +38,18 @@ const send = (route,form,checkbox,action)=>{ // MANDAR DATOS A PHP
         body: form
     }).then( (res) => res.text()).then( (data) => {
         console.log(data);
-        if(data == "loginError"){ // DEPENDIENDO DEL RESULTADO MANDAR UNA ALERTA
+        if(data == "loginError" || data == "errorPriv"){ // DEPENDIENDO DEL RESULTADO MANDAR UNA ALERTA
             document.getElementById("error-datos").classList.add("formMensaje-active");
         }else if(data == "success"){
-            window.location.href='main.php';
+            window.location.href='main';
             localStorage.setItem("msj", "true");
+        }else if(data == "successPriv"){
+            window.location.href='privados';
+            localStorage.setItem("priv", "true");
+        }else if(data.includes("limite")){
+            let err = document.getElementById("formulario-mensaje");
+            document.querySelector(`#formulario-mensaje`).classList.add("formInputError-active");
+            err.innerHTML = "<p><i class='bi bi-exclamation-triangle-fill'></i><b>Advertencia: </b>Límite de intentos excedida|EN DESARROLLO|</p>";
         }else{
             alert(data,checkbox, action); // Llamada a función para una alerta de acuerdo al formulario
         }
@@ -68,7 +75,13 @@ if(admin){
     formulario.addEventListener('submit', (e) => {
         e.preventDefault();
         let form = new FormData(formulario);
-        if(!titleForm.textContent.includes(form.get("table"))){
+        if(form.get("table") === "docsLogin"){
+            // data =[campos.password];
+            if(campos.password){
+                send("admin/CRUD/create/receivedData.php",form,[],"add");
+            }
+            return;
+        }else if(!titleForm.textContent.includes(form.get("table"))){
             location.reload();
             return;
         }
@@ -80,6 +93,8 @@ if(admin){
             data = [campos.categoria,true,true,true,true,true];
         }else if(form.get("table") === "directorio"){
             data = [campos.nombre,campos.url,campos.estado,campos.carrera,campos.email,campos.telefono];
+        }else if(form.get("table") === "docsPriv"){
+            data =[campos.password];
         }
         if(form.get("table") === "imageNews"){ // FORMULARIO PARA SELECCIONAR IMAGENES A UNA NOTICIA
             let checks = document.querySelectorAll(".check_foto"), checkbox = []; ; // OBTENER checkboxs POR SU CLASE

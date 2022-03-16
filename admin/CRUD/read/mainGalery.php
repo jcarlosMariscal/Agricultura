@@ -5,14 +5,16 @@
   if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainGalery.php"){
       header("Location: ../../index.php");
   }
+  $recibido = (int) filter_var($url, FILTER_SANITIZE_NUMBER_INT); 
+  if($recibido === 0) $recibido=1;
+  $rango = 5;
   require "Read.php";
   $query = new Read();
-  $galery = $query->readGalery();
-  $url = "http://".$_SERVER['HTTP_HOST']."/Projects/Agricultura/galeria.php";
+  $galery = $query->readGalery($recibido,$rango);
 ?>
 <div class="container main">
   <h1 class="welcome text-center">Galeria</h1>
-  <a class="mover-a" href="<?php echo $url; ?>" target="_blank">Viualizar</a>
+  <a class="mover-a" href="../galeria" target="_blank">Viualizar</a>
   <br><br>
   <div class="table-responsive">
     <table class="table">
@@ -37,7 +39,7 @@
                   <tr>
                     <td><?php echo $data["id_foto"]; ?></td>
                     <td><?php echo $data["nom_foto"]; ?></td>
-                    <td><img src="../<?php echo $data['archivo']; ?> " width="50" height="50"></img></td>
+                    <td><img src="../<?php echo $data['archivo']; ?> " class="img-gal-admin"></img></td>
                     <td><?php echo $data["descripcion"];; ?></td>
                     <td><?php echo $data["fecha_publi"]; ?></td>
                     <td><?php echo $data["fecha_modi"]; ?></td>
@@ -53,6 +55,12 @@
     </table>
   </div>
   <br>
+  <?php
+    $paginador = $query ->paginador("id_foto","galeria",$recibido,$rango);
+    $section = "galeria";
+    require "helper/paginador.php";
+  ?>
+<!-- PAGINADOR -->
 </div>
 <!-- <script src="../js/sendDataUpdate.js" type="module"></script> -->
 <script src="js/delete.js" type="module"></script>

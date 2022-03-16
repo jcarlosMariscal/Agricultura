@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/admin.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Document</title>
+    <link rel="icon" href="../img/favicon.png">
+    <title>Administrador</title>
 </head>
 <body>
     <div class="container">
+        <!-- MENÚ ADMIN SECCIONES -->
         <div class="letra">
             <img class="imagen img-fluid" src="../img/comite.png" alt="">
             <h3>COMITE NACIONAL DE AGRICULTURA PROTEGIDA Y SUSTENTABLE</h3>
@@ -24,20 +26,20 @@
         <br>
         <div class="usuario-modificar btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="First group">
-                <a href="main.php?p=galeria" class="btn-inicio btn"><i class="bi bi-images"></i>Galeria</a>
+                <a href="galeria" class="btn-inicio btn"><i class="bi bi-images"></i>Galeria</a>
                 <!-- <button type="button" class="btn-inicio btn"><i class="bi bi-card-image"></i>Galeria</button> -->
             </div>
             <div class="btn-group me-2" role="group" aria-label="Second group">
-                <a href="main.php?p=documentos" class="btn-inicio btn"><i class="bi bi-file-earmark-bar-graph"></i>Documentos</a>
+                <a href="documentos" class="btn-inicio btn"><i class="bi bi-file-earmark-bar-graph"></i>Documentos</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="main.php?p=noticias" class="btn-inicio btn"><i class="bi bi-newspaper"></i>Noticias</a>
+                <a href="noticias" class="btn-inicio btn"><i class="bi bi-newspaper"></i>Noticias</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="main.php?p=categoria" class="btn-inicio btn"><i class="bi bi-bookmark-check"></i>Categoria</a>
+                <a href="categoria" class="btn-inicio btn"><i class="bi bi-bookmark-check"></i>Categoria</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
-                <a href="main.php?p=directorio" class="btn-inicio btn"><i class="bi bi-folder-plus"></i>Directorio</a>
+                <a href="directorio" class="btn-inicio btn"><i class="bi bi-folder-plus"></i>Directorio</a>
             </div>
             <div class="btn-group me-2" role="group" aria-label="Third group">
                 <a href="cerrar.php" class="btn-inicio btn"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>

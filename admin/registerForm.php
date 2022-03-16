@@ -4,7 +4,7 @@ require "RegisterDB.php";
 $query = new RegisterDB();
 $validate = $query->validateAdmin();
 if($validate === 1){
-    header('Location:index.php');
+    header('Location: index.php');
 }
 include "template/head.php";
 ?>
@@ -19,14 +19,12 @@ include "template/head.php";
         <img  src="../img/comite.png" class="logo" width="250px" alt="">
         <h2 class="welcome text-center">Registro de Administrador</h2>
         <hr size="4" style="color: #47874a;">
-        <!-- FORMULARIO DE REGISTRO -->
         <form class="form-signin" id="admin">
                 <div>
                     <input type="hidden" name="table" value="checkInAdmin">
                 </div>
                 <div class="card card-container sec-admin">
                         <div class="center-input input-group" id="group-nombre">
-                            <!-- <span class="categoria-color input-group-text" id="basic-addon1">Nombre:</span> -->
                             <input type="text" name="nombre" id="nombre" class="login_box" placeholder="Ingrese su nombre">
                             <i class="input-icon icon-admin bi"></i>
                             <p class="formInputError">El nombre no debe estar vacío, debe tener un mínimo de 3 y un máximo de 30 caracteres.</p>
@@ -34,7 +32,6 @@ include "template/head.php";
                 </div>
                 <div class="card card-container sec-admin">
                         <div class="center-input input-group" id="group-password">
-                            <!-- <span class="categoria-color input-group-text" id="basic-addon1">Nombre:</span> -->
                             <input type="password" name="password" id="password" class="login_box" placeholder="Ingrese su contraseña">
                             <i class="input-icon icon-admin bi"></i>
                             <p class="formInputError">La contraseña debe tener mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número</p>
@@ -46,7 +43,7 @@ include "template/head.php";
                 <div class="formOneGrupo formMensaje" id="error-datos">
                     <p><i class="bi bi-x-circle-fill"></i><b>Error: </b>No se pudo iniciar sesión, verifique que sus datos sean correctos.</p>
                 </div>
-                    <button class="btn-admin" type="submit" id="button"><i class="bi bi-box-arrow-in-right"></i>Iniciar sesión</button>
+                <button class="btn-admin" type="submit" id="button"><i class="bi bi-person-plus"></i>Registrar</button>
             </form>
     </div>
 <div>

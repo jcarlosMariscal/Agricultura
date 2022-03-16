@@ -1,0 +1,13 @@
+Options -Indexes
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+RewriteEngine On
+RewriteRule ^([-a-zA-Z0-9/]+)$ main.php?p=$1
+RewriteRule ^main$ main.php [L]
+# RewriteRule ^galeria/agregar/$ CRUD/create/createGalery.php [L]
+
+# https://uniwebsidad.com/tutoriales/trucos-y-ejemplos-de-configuracion-del-archivo-htaccess-de-apache?from=librosweb
+# https://ayudawp.com/todo-sobre-htaccess/#Limitando_metodos_de_peticion_GET_yPUT_al_servidor
+# https://www.webempresa.com/blog/codigos-utiles-htaccess-para-wordpress.html

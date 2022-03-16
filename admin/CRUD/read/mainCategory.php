@@ -5,9 +5,12 @@ $url= $_SERVER["REQUEST_URI"];
 if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRUD/read/mainCategory.php"){
     header("Location: ../../main.php");
 }
+  $recibido = (int) filter_var($url, FILTER_SANITIZE_NUMBER_INT); 
+  if($recibido === 0) $recibido=1;
+  $rango = 1;
   require "Read.php";
   $query = new Read();
-  $category = $query->readCategory();
+  $category = $query->readCategory($recibido,$rango);
 ?>
 <div class="container main">
   <h1 class="welcome text-center">Categoria</h1>
@@ -44,5 +47,10 @@ if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRU
     </table>
   </div>
   <br>
+  <?php
+    $paginador = $query ->paginador("id_categoria","categoria",$recibido,$rango);
+    $section = "categoria";
+    require "helper/paginador.php";
+  ?>
 </div>
 <script src="js/delete.js" type="module"></script>
