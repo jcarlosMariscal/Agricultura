@@ -99,4 +99,11 @@ class Read{
         $query->bindParam(2,$noti);
         if($query->execute()) return $query;
     }
+
+    function readIdNews($id){
+        $sql = "SELECT id_noticia FROM noticia WHERE id_noticia = ?";
+        $query = $this->cnx->prepare($sql);
+        $query->bindParam(1,$id);
+        if($query->execute()) return $query->rowCount();
+    }
 }

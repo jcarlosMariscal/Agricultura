@@ -3,6 +3,8 @@ $id = $_GET["noticia"];
 require "Read.php";
 $query = new Read();
 $noticia = $query->readNewsId($id);
+$getId = $query->readIdNews($id);
+if(!$getId) header("Location: ../inicio");
 $res = $noticia->fetch();
 $arrImage = $query->getImageArrId($id);
 
@@ -26,10 +28,13 @@ if(!$arrImage){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Agricultura</title>
+    <title>Noticia | <?php echo $res['titulo']; ?></title>
     
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="icon" href="../img/favicon.png">
 </head>
 <body class="bc">
   <header>
@@ -94,15 +99,36 @@ if(!$arrImage){
                 ?>
         <section class="more-img-noti">
             <div class="imagen">
-                <h4 class="text-center" class="font-weight-light">Más imágenes</h4>
                 <?php
-                    $moreImg = $query->readMoreImgId($mainImageId,$id);
+                $moreImg = $query->readMoreImgId($mainImageId,$id);
+                $tot = $moreImg->rowCount();
+                if($tot>=1){
+                    ?><h4 class="text-center" class="font-weight-light">Más imágenes</h4><?php
+                }
+                ?>
+                <?php
                     if($moreImg){
                         foreach($moreImg as $img){
                             ?>
                             <div class='imagen-noticia'>
-                                <img src="../<?php echo $img['archivo']; ?>" alt="<?php echo $img['nom_foto']; ?>" class="sec-noti-img"> 
+                                <a data-toggle="modal" data-target="#image<?php echo $img['id_foto'];?>">
+                                    <img src="../<?php echo $img['archivo']; ?>" alt="<?php echo $img['nom_foto']; ?>" class="sec-noti-img cursor-p"> 
+                                </a>
                             </div>
+                            <!-- MODAL -->
+                            <div class="modal fade" id="image<?php echo $img['id_foto'];?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                <div class="modal-content imagen-gde">
+                                    <img src="../<?php echo $img['archivo'];?>" class="img-fluid rounded" alt="">
+                                </div>
+                                <div class="info-img">
+                                    <p><b><?php echo $img['nom_foto']; ?></b></p>
+                                    <p><?php echo $img['descripcion']; ?></p>
+                                    <p><?php echo $img['fecha_publi']; ?></p>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- MODAL -->
                             <?php
                         }
                     }
@@ -116,9 +142,14 @@ if(!$arrImage){
             <div class="noti-img">
                 <br>
                 <hr>
-                <h4 class="text-center" class="font-weight-light"> Noticias que le pueden interesar</h4>
                 <?php
-                    $moreNews = $query->readMoNews($res['categoria'],$id);
+                $moreNews = $query->readMoNews($res['categoria'],$id);
+                $totl = $moreNews->rowCount();
+                if($totl>=1){
+                    ?><h4 class="text-center" class="font-weight-light"> Noticias que le pueden interesar</h4><?php
+                }
+                ?>
+                <?php
                     if($moreNews){
                         foreach($moreNews as $news){
                             $getImg = $query->getImageOne($news['id_noticia']);

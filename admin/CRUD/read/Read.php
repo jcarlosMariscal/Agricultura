@@ -82,7 +82,7 @@ class Read{
     }
     // OBTENER LAS IMÁGENES QUE TIENE LA NOTICIA
     function getImage($id_noticia){
-        $sql = "SELECT archivo FROM galeria WHERE id_noticia = ?";
+        $sql = "SELECT archivo,id_foto FROM galeria WHERE id_noticia = ?";
         $query = $this->cnx->prepare($sql);
         $query -> bindParam(1,$id_noticia);
         if($query->execute()) return $query;

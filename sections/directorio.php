@@ -3,6 +3,7 @@
     include "../template/header.php";
     require "Read.php";
     $query = new Read;
+    $directory = $query->readDirectory();
 ?>
 <!-------------------------------Body------------------------------------------------------------>
 <div class="container bg">
@@ -11,6 +12,7 @@
   <hr>
   <table class="table table-bordered table-light">
     <thead>
+      <?php if($directory->rowCount()>=1){ ?>
       <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Estado</th>
@@ -19,8 +21,6 @@
         <th scope="col">Telefono</th>
       </tr>
       <?php
-        $directory = $query->readDirectory();
-        if($directory){
           foreach($directory as $data){
             ?>
         <tr> 

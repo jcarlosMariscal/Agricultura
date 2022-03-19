@@ -4,7 +4,7 @@
     <?php
         $total_pag = $paginador[2];
         $total_registro = $paginador[3];
-        if($total_registro>=$rango){
+        if($total_registro>$rango){
 
             ?><li class="<?php echo $recibido<=1 ? 'disabled' : '' ?>"><a href="<?php echo $section; ?>?pagina=<?php echo $recibido-1; ?>">«</a></li><?php
 

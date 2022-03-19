@@ -42,10 +42,26 @@
                             foreach($images as $data){
                             ?>
                             <div class="image gal">
-                                <img src="../../../<?php echo $data['archivo'];?>" alt="<?php echo $data['nom_foto']; ?>" class="img-thumbnail">
+                                <a data-toggle="modal" data-target="#image<?php echo $data['id_foto'];?>">
+                                    <img src="../../../<?php echo $data['archivo'];?>" alt="<?php echo $data['nom_foto']; ?>" class="img-thumbnail cursor-p">
+                                </a>
                                 <input type="checkbox" id="check<?php echo $id; ?>" name="id_foto" value="<?php echo $data['id_foto']; ?>" class="check_foto" checked>
                                 <label class="check" for="check">Seleccionar</label>
                             </div>
+                            <!-- MODAL -->
+                            <div class="modal fade" id="image<?php echo $data['id_foto'];?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                <div class="modal-content imagen-gde-ad">
+                                    <img src="../../../<?php echo $data['archivo'];?>" class="img-fluid rounded" alt="">
+                                </div>
+                                <div class="info-img-ad">
+                                    <p><b><?php echo $data['nom_foto']; ?></b></p>
+                                    <p><?php echo $data['descripcion']; ?></p>
+                                    <p><?php echo $data['fecha_publi']; ?></p>
+                              </div>
+                                </div>
+                            </div>
+                            <!-- MODAL -->
                             <?php
                             $id++;
                             }

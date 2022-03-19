@@ -98,7 +98,7 @@ class Create{
 
     //  ------------------SELECCIONAR IMAGEN PARA LA NOTICIA ------------------
     function readImages(){
-        $sql = "SELECT id_foto,nom_foto,archivo FROM galeria WHERE id_noticia IS NULL";
+        $sql = "SELECT id_foto,nom_foto,archivo,descripcion,fecha_publi FROM galeria WHERE id_noticia IS NULL";
         $query = $this->cnx->prepare($sql);
         if($query->execute()){
             return $query;

@@ -7,7 +7,7 @@
   }
   $recibido = (int) filter_var($url, FILTER_SANITIZE_NUMBER_INT); 
   if($recibido === 0) $recibido=1;
-  $rango = 5;
+  $rango = 10;
   require "Read.php";
   $query = new Read();
   $news = $query->readNews($recibido,$rango);
@@ -55,7 +55,21 @@
                           $image = $query->getImage($data['id_noticia']);
                           if($image){
                             foreach($image as $img){
-                              ?><div class="text-center"><a target="_blank" href="../<?php echo $img['archivo']; ?>" >Ver</a></div><?php
+                              ?>
+                              <div class="text-center">
+                                
+                                <a href="#" data-toggle="modal" data-target="#image<?php echo $img['id_foto']?>"><p class="cursor-p">Ver</p></a>
+                              </div>
+                              <!-- MODAL -->
+                              <div class="modal fade" id="image<?php echo $img['id_foto'];?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                  <div class="modal-content imagen-gde">
+                                    <img src="../<?php echo $img['archivo'];?>" class="img-fluid rounded" alt="">
+                                  </div>
+                                </div>
+                              </div>
+                                  <!-- MODAL -->
+                              <?php
                             }
                           }
                         }

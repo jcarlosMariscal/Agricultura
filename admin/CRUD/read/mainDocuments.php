@@ -7,7 +7,7 @@ if("http://" . $host . $url === "http://localhost/Projects/Agricultura/admin/CRU
 }
   $recibido = (int) filter_var($url, FILTER_SANITIZE_NUMBER_INT); 
   if($recibido === 0) $recibido=1;
-  $rango = 5;
+  $rango = 10;
   require "Read.php";
   $query = new Read();
   $documents = $query->readDocuments($recibido,$rango);

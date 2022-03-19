@@ -60,12 +60,12 @@ class RegisterDB{
             }
         }
     }
-    // function updateFailedAttempts($table,$intentos, $field, $value){
-    //     $sql = "UPDATE $table SET intentos = ? WHERE $field = ?";
-    //     $query = $this->cnx->prepare($sql);
-    //     $query -> bindParam(1,$intentos);
-    //     $query -> bindParam(2,$value);
-    //     $query->execute();
-    // }
+    function updateFailedAttempts($table,$intentos, $field, $value){
+        $sql = "UPDATE $table SET intentos = ? WHERE $field = ?";
+        $query = $this->cnx->prepare($sql);
+        $query -> bindParam(1,$intentos);
+        $query -> bindParam(2,$value);
+        $query->execute();
+    }
 }
 ?>

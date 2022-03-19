@@ -4,6 +4,7 @@
   require "sections/Inicio.php";
   $query = new Inicio();
   $arrNews = $query->createArr("id_noticia","noticia");
+  $destacados = count($arrNews);
 ?>
 <!--------------------- PÁGINA DE INICIO ---------------------------->
 <div class="container bg">
@@ -33,12 +34,15 @@
   <!--Noticia-->  
   <div class="">
     <br>
-    <h3 class="text-center" class="font-weight-light">Destacados</h3>
+    <?php 
+    if($destacados>=1){
+      ?><h3 class="text-center" class='font-weight-light'>Destacados</h3><?php
+    }
+    ?>
     <hr>
     <div class="bd-example efct1">
       <section>
           <?php
-          $destacados = count($arrNews);
           if($destacados){
           $news1 = $query->readNewsDestacados($arrNews[$destacados-1]);
           $res1 = $news1->fetch();
@@ -80,46 +84,49 @@
           <br>
           <?php 
           }
-        } ?>
+        ?>
       </section>
       <br>
       <!--Noticia-->
       <!--galeria-->
       <div class="row">
         <?php
-        $moreNews = $query->readMoreNews($arrNews[$destacados-1],$arrNews[$destacados-2]);
-        if($moreNews){
-          foreach($moreNews as $more){
-            ?>
-            <div class="col-3">
-              <div class="border art">
-                <div class="">
-                  <?php
-                    $image = $query->getImageOne($more['id_noticia']); 
-                    if(!$image){
-                      ?><img src="https://programacion.net/files/article/20160819020822_image-not-found.png" alt="Imágen no disponible" class="responsive-img img-news_more"><?php
-                    }else{
-                      $img = $image->fetch();
-                        ?>
-                        <img src="<?php echo $img['archivo'];?>" alt="<?php echo $img['nom_foto'];?>" class="responsive-img img-news_more">
-                        <?php
-                    }
-                  ?>
-                </div>
-                <div class="title">
-                  <h6><a href="noticia/<?php echo $more['id_noticia']; ?>" class="enlace-not"><?php echo $more['titulo']; ?></a></h6>
-                </div>
-                <div class="des">
-                  <p><?php echo $more['descripcion'];?></p>
-                </div>
-                <div class="btn-more">
-                  <a href="noticia/<?php echo $more['id_noticia']; ?>" class='btn-success btn-sm'>Leer más</a>
+        if($destacados >= 3){
+          $moreNews = $query->readMoreNews($arrNews[$destacados-1],$arrNews[$destacados-2]);
+          if($moreNews){
+            foreach($moreNews as $more){
+              ?>
+              <div class="col-3">
+                <div class="border art">
+                  <div class="">
+                    <?php
+                      $image = $query->getImageOne($more['id_noticia']); 
+                      if(!$image){
+                        ?><img src="https://programacion.net/files/article/20160819020822_image-not-found.png" alt="Imágen no disponible" class="responsive-img img-news_more"><?php
+                      }else{
+                        $img = $image->fetch();
+                          ?>
+                          <img src="<?php echo $img['archivo'];?>" alt="<?php echo $img['nom_foto'];?>" class="responsive-img img-news_more">
+                          <?php
+                      }
+                    ?>
+                  </div>
+                  <div class="title">
+                    <h6><a href="noticia/<?php echo $more['id_noticia']; ?>" class="enlace-not"><?php echo $more['titulo']; ?></a></h6>
+                  </div>
+                  <div class="des">
+                    <p><?php echo $more['descripcion'];?></p>
+                  </div>
+                  <div class="btn-more">
+                    <a href="noticia/<?php echo $more['id_noticia']; ?>" class='btn-success btn-sm'>Leer más</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <?php
+              <?php
+            }
           }
         }
+      }
         ?>
       </div>
       <br>

@@ -327,6 +327,27 @@ input[type="checkbox"]:checked + .check {
 .sec-admin{
   margin-bottom: 2px;
 }
+.cursor-p{
+  cursor: pointer;
+}
+.imagen-gde-ad{
+  position: absolute;
+}
+.imagen-gde img{
+  object-fit: cover;
+  height: 82vh;
+}
+.info-img-ad{
+  position: relative;
+  color: #fff;
+  background-color: rgba(31, 28, 28, 0.7);
+  top: 460px;
+  margin: 20px;
+  padding: 10px;
+}
+/* .info-img p{
+  -webkit-text-stroke: 0.4px #000;
+} */
 
 /* ---------------------- PAGINADOR ----------------- */
 .paginacion{

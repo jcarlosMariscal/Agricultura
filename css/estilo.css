@@ -293,10 +293,6 @@
     padding: 5px;
   }
   
-  div.gallery:hover {
-  border: 1px solid #777;
-  }
-  
   div.gallery img {
     width: 100%;
     height: 150px;
@@ -467,6 +463,9 @@
   height: 150px;
   object-fit: cover;
 }
+.cursor-p{
+  cursor: pointer;
+}
 .sec-noti-img{
   width: 100%;
   height: 280px;
@@ -507,6 +506,10 @@
 .doc-title{
   padding-top: 20px;
   margin: 0;
+  color: rgb(26, 25, 25);
+}
+.doc-title:hover{
+  text-decoration: none;
 }
 .documento{
   margin-right: 0;
@@ -609,6 +612,31 @@
   background-color: #245026;
 }
 
+.gallery a img{
+  position: relative;
+  /* width: 500px; */
+}
+.gallery a img:hover{
+  transform: scale(1.1);
+}
+.imagen-gde{
+  position: absolute;
+}
+.imagen-gde img{
+  object-fit: cover;
+  height: 82vh;
+}
+.info-img{
+  position: relative;
+  color: #fff;
+  background-color: rgba(31, 28, 28, 0.7);
+  bottom: 200px;
+  margin: 20px;
+  padding: 10px;
+}
+.info-img p{
+  -webkit-text-stroke: 0.4px #000;
+}
 /* ---------------------- PAGINADOR ----------------- */
 .paginacion{
   padding: 10px;
