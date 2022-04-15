@@ -31,12 +31,23 @@
                             <!-- <div> -->
                                 <div class='documento border'>
                                     <div class="">
-                                        <img src="iconos/pdf.png" class="img-fluid icon-doc" alt="Responsive image mt-5">
-                                        <h5 class="doc-title"><?php echo $data['nombre'];?></h5>
+                                    <a data-toggle="modal" data-target="#doc<?php echo $data['id_documento'];?>">
+                                        <img src="iconos/pdf.png" class="img-fluid icon-doc cursor-p" alt="Responsive image mt-5">
+                                        <h5 class="doc-title cursor-p"><?php echo $data['nombre'];?></h5>
+                                    </a>
                                     </div>
                                     <div class="doc-desc">
                                         <p class="text-justify"><?php echo $data['descripcion'];?></p>
                                     </div>
+                                    <!-- MODAL -->
+                                    <div class="modal fade" id="doc<?php echo $data['id_documento'];?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content imagen-gde">
+                                                <embed src="http://localhost/Projects/Agricultura/<?php echo $data['archivo'];?>" type="application/pdf" width="100%" height="700px" />
+                                            </div>
+                                            </div>
+                                        </div>
+                                    <!-- MODAL -->
                                 </div>
                             <!-- </div> -->
                         </div>
