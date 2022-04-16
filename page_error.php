@@ -22,7 +22,7 @@
             session_start();
             if (isset($_SESSION["admin"])){
                 ?>
-                <h2 class="text-center">Ha iniciado sesión como Administrador</h2>
+                <h2 class="text-center">Ha iniciado sesión como Administrador.</h2>
                 <a class="text-center" href="main">Regresar a interfaz de administrador</a>
                 <?php
             }
